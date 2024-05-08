@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+{% block title %} Mes visuels {% endblock title %}
+
+{% block content %}
+<main role="main" class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h2 class="h5 page-title">Tous les visuels</h2>
+                <div class="row">
+                    <div class="col-md-6 col-xl-4 mb-4">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-3 text-center">
+                                        <span class="circle circle-sm bg-primary-light">
+                                            <i class="fe fe-16 fe-shopping-bag text-white mb-0"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col pr-0">
+                                        <p class="h4 mb-2">Ventes </p>
+                                        <span class="h5 mb-2">Total: {{ nombre_total_ventes }}</span><br>
+                                        <span class="h5">CA: {{ total_chiffre_affaires }} Fcfa</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ajoutez le reste du contenu ici -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Meilleur produit vendu
+        var bestProductCtx = document.getElementById('bestProductChart').getContext('2d');
+        new Chart(bestProductCtx, {
+            type: 'bar',
+            data: {
+                labels: ["{{ best_product.produit__nom }}"],
+                datasets: [{
+                    label: 'Quantité vendue',
+                    data: [{{ best_product.total_sold }}],
+                    backgroundColor: '#9BD0F5',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Meilleur employé
+        var bestEmployeeCtx = document.getElementById('bestEmployeeChart').getContext('2d');
+        new Chart(bestEmployeeCtx, {
+            type: 'bar',
+            data: {
+                labels: ["{{ best_employee.personnel__username }} {{ best_employee.IdVendeur_prenoms }}"],
+                datasets: [{
+                    label: 'Meilleur Vendeur',
+                    data: [{{ best_employee.total_sales }}],
+                    backgroundColor: '#FF6384',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Top 5 des meilleurs clients
+        var topClientsLabels = [{% for client in top_clients %}"{{ client.IdClient_nom }} {{ client.IdClient_prenoms }}",{% endfor %}];
+        var topClientsData = [{% for client in top_clients %}{{ client.total_purchases }},{% endfor %}];
+
+        var topClientsCtx = document.getElementById('topClientsChart').getContext('2d');
+        new Chart(topClientsCtx, {
+            type: 'bar',
+            data: {
+                labels: topClientsLabels,
+                datasets: [{
+                    label: 'Nombre d\'achats',
+                    data: topClientsData,
+                    backgroundColor: '#9BD0F5',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y'
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Nombre total de ventes par mois
+        var salesByDateCtx = document.getElementById('salesByDateChart').getContext('2d');
+        new Chart(salesByDateCtx, {
+            type: 'line',
+            data: {
+                labels: {{ years_months|safe }},
+                datasets: [{
+                    label: 'Nombre total de ventes',
+                    data: {{ total_sales|safe }},
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ labels|safe }},
+                datasets: [{
+                    label: 'Chiffre d\'affaires',
+                    data: {{ data|safe }},
+                    backgroundColor: 'rgb(75, 192, 192)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+<script>
+    /* defind global options */
+    Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
+    Chart.defaults.global.defaultFontColor = colors.mutedColor;
+</script>
+<script src="{{ url_for('static', filename='app/js/gauge.min.js') }}"></script>
+<script src="{{ url_for('static', filename='app/js/jquery.sparkline.min.js') }}"></script>
+<script src="{{ url_for('static', filename='app/js/apexcharts.min.js') }}"></script>
+<script src="{{ url_for('static', filename='app/js/apexcharts.custom.js') }}"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-56159088-1');
+</script>
+</body>
+</html>
+{% endblock content %}
+
+
+
+# @app.route('/success')
+# def success():
+#     IdUser = session.get('IdUtilisateurs')
+#     connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
+#     cursor = connection.cursor()
+#     cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
+
+#     utilisateurs = cursor.fetchone()
+#     return render_template('success.html', utilisateurs=utilisateurs)
+
+
+
+#*********** insertion de donnees a la base de donnees *************
+
+# la table fournisseurs
+
+# connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
+# cursor = connection.cursor()
+
+# # Chemin vers le fichier CSV
+# chemin_fichier_csv = "./data/Fournisseurs.csv"
+
+# Ouverture du fichier CSV
+# with open(chemin_fichier_csv, 'r', newline='') as file:
+#     cursor = connection.cursor()
+#     csv_reader = csv.reader(file)
+#     next(csv_reader)  # Ignorer la première ligne si elle contient des en-têtes
+ 
+#     for row in csv_reader:
+#         print(row)
+#         # Exécution de la requête INSERT avec les valeurs de la ligne
+#         cursor.execute("INSERT INTO Fournisseurs (NomEntreprise, Nom_Contact, Adresse, Telephone, Email, Mode_paiement) VALUES (?, ?, ?, ?, ?, ?)",
+#                        row)
+
+#     connection.commit()
+#     # Fermeture du curseur
+#     cursor.close()
+ 
+
+# la table Produits
+    
+# # Chemin vers le fichier CSV
+# @app.route('/inserer')
+# def inserer():
+#     chemin_fichier_csv = "./data/clients.csv"
+
+#     # Ouverture du fichier CSV
+#     with open(chemin_fichier_csv, 'r', newline='') as file:
+#         cursor = connection.cursor()
+#         csv_reader = csv.reader(file)
+#         next(csv_reader)  # Ignorer la première ligne si elle contient des en-têtes
+    
+#         for row in csv_reader:
+#             print(row)
+#             # Exécution de la requête INSERT avec les valeurs de la ligne
+#             cursor.execute("INSERT INTO Clients (Nom, Prenoms, Telephone, Email, Genre, Adresse,  DatesCreation) VALUES (?, ?, ?, ?, ?, ?, ?)",
+#                         row[0],row[1],row[2],row[3],row[4],row[5],row[6])
+
+#         connection.commit()
+#         # Fermeture du curseur
+#     cursor.close()
+#     return redirect('ok')
+    
+    
+# @app.route('/success')  
+# def ok():
+#     return render_template('vente/success.html')
+    
+
+ 
+# # Chemin  pour les fichiers CSV
+# chemin_fichier_csv = "./data/clients.csv"       
+     
+# # Ouverture du fichier CSV
+# with open('clients.csv', 'r') as file:
+#     cursor = connection.cursor()
+#     next(file)  # Ignorer la première ligne si elle contient des en-têtes
+#     for line in file:
+#         Nom, Prenoms,  Telephone, Email,Genre, Adresse, DatesCreation = line.strip().split(',')
+#         cursor.execute("INSERT INTO Clients (Nom, Prenoms, Telephone, Email,Genre, Adresse,  DatesCreation) VALUES (?, ?, ?, ?, ?, ?)",
+#                         Nom, Prenoms,Telephone, Email, Genre , Adresse, DatesCreation)
+#     connection.commit()
+
+# # Fermeture de la connexion
+# cursor.close()
+# connection.close()

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Inscription | Hyper - Tableau de bord d'administration Bootstrap 5 réactif</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Un thème d'administration entièrement fonctionnel pouvant être utilisé pour construire un CRM, un CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <!-- Favicon de l'application -->
+    <link rel="shortcut icon" href="static/images/favicon.ico">
+
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <style>
+        /* Ajout de styles CSS personnalisés */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .card-header {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .card-header img {
+            height: 40px;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            margin-bottom: 20px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .footer a:hover {
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body class="loading authentication-bg" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+
+    <div class="container">
+        <div class="card">
+            <!-- Logo-->
+            <div class="card-header">
+                <a href="index.html">
+                    <img src="static/images/logo.png" alt="">
+                </a>
+            </div>
+
+            <div class="card-body">
+                <h4 class="text-dark-50 text-center mt-0 fw-bold">INSCRIPTION</h4>
+                <p class="text-muted mb-4 text-center">Vous n'avez pas de compte ? Créez votre compte, cela prend moins d'une minute</p>
+
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="Images" class="form-label">Images</label>
+                        <input class="form-control" type="file" id="Images" name="myfiles[]" accept="image/*" required>
+                        <div id="Images-preview"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Nom" class="form-label">Nom</label>
+                        <input class="form-control" type="text" id="Nom" name="Nom" placeholder="Entrez votre Nom" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Prenoms" class="form-label">Prénoms</label>
+                        <input class="form-control" type="text" id="Prenoms" name="Prenoms" placeholder="Entrez vos Prénoms" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Adresse Email" class="form-label">Adresse Email</label>
+                        <input class="form-control" type="email" name="Email" id="Adresse Email" required="" placeholder="Entrez votre adresse e-mail">
+                    </div>
+                    <div class="input-group input-group-merge">
+                        <label for="Mot_de_pass" class="form-label">Mot_de_pass</label>
+                        <input type="password" id="Mot_de_pass" class="form-control" name="Mot_de_pass" placeholder="Entrez votre Mot_de_pass">
+                        <div class="input-group-text" data-password="false">
+                            <span class="password-eye"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Adresse" class="form-label">Adresse</label>
+                        <input class="form-control" type="text" id="Adresse" name="Adresse" required placeholder="Entrez votre Adresse">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Telephone" class="form-label">Telephone</label>
+                        <input class="form-control" type="text" id="Telephone" name="Telephone" required placeholder="Entrez votre Téléphone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Roles" class="form-label">Roles</label>
+                        <select class="form-select" id="Roles" name="Roles" required>
+                            <option value="" disabled selected>Choisissez le Roles</option>
+                            <option value="Administrateur">Administrateur (Analyste de données)</option>
+                            <option value="Gestionnaire_de_Stocks">Gestionnaire de stock (Employé)</option>
+                            <option value="Caissier">Caissier (Vendeur)</option>
+                        </select>
+                    </div>
+                    <!-- <div class="mb-3">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="checkbox-signup" required>
+                            <label class="form-check-label" for="checkbox-signup">J'accepte <a href="#" class="text-muted">les Conditions d'utilisation</a></label>
+                        </div>
+                    </div>-->
+                    <div class="mb-3 text-center">
+                        <button class="btn btn-primary" type="submit">S'inscrire</button>
+                    </div>
+                </form>
+            </div> <!-- end card-body -->
+
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <p class="text-muted">Vous avez déjà un compte ? <a href="login" class="text-muted ms-1"><b>S'identifier</b></a></p>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end container -->
+
+    <!-- Footer -->
+    <!-- <footer class="footer footer-alt">
+        <p>© 2024 <a href="#">GOUA</a> Tous droits réservés</p>
+    </footer> -->
+
+    <!-- Scripts -->
+    <!-- <script src="assets/js/vendor.min.js"></script>
+    <script src="assets/js/app.min.js"></script> -->
+</body>
+
+</html>

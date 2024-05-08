@@ -1,0 +1,67 @@
+/* Style du corps */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Couleur de fond */
+    color: #333; /* Couleur du texte */
+}
+
+/* Style de la carte */
+.card {
+    border: none; /* Pas de bordure */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+/* Style de l'en-tête de la carte */
+.card-header {
+    background-color: #007bff; /* Couleur de fond */
+    padding: 20px; /* Espacement intérieur */
+}
+
+/* Style du logo */
+.card-header img {
+    height: 40px; /* Hauteur du logo */
+}
+
+/* Style du titre de la carte */
+.card-title {
+    color: #fff; /* Couleur du texte */
+    font-size: 24px; /* Taille de police */
+}
+
+/* Style du corps de la carte */
+.card-body {
+    padding: 20px; /* Espacement intérieur */
+}
+
+/* Style des champs de saisie */
+.form-control {
+    border: 1px solid #ced4da; /* Bordure */
+    border-radius: 4px; /* Coins arrondis */
+    padding: 10px; /* Espacement intérieur */
+    margin-bottom: 15px; /* Marge en bas */
+}
+
+/* Style du bouton */
+.btn-primary {
+    background-color: #007bff; /* Couleur de fond */
+    border: none; /* Pas de bordure */
+    border-radius: 4px; /* Coins arrondis */
+    padding: 10px 20px; /* Espacement intérieur */
+    color: #fff; /* Couleur du texte */
+    font-size: 16px; /* Taille de police */
+    cursor: pointer; /* Curseur pointer */
+}
+
+/* Style du lien du bas de page */
+.footer {
+    text-align: center; /* Alignement du texte */
+    margin-top: 50px; /* Marge en haut */
+    font-size: 14px; /* Taille de police */
+    color: #777; /* Couleur du texte */
+}
+
+/* Style du lien du bas de page au survol */
+.footer a:hover {
+    color: #333; /* Couleur du texte au survol */
+    text-decoration: none; /* Pas de soulignement */
+}

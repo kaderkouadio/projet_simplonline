@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <title>GOUA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Un thème d'administration complet qui peut être utilisé pour créer des CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <!-- Favicon de l'application -->
+    <!-- <link rel="shortcut icon" href="static/images/favicon.ico"> -->
+    
+    <!-- CSS de l'application -->
+    <!-- <link href="static/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="static/css/app.min.css" rel="stylesheet" type="text/css" id="light-style" />
+    <link href="static/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" /> -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <style>
+        /* Ajout de styles CSS personnalisés */
+        body {
+            background-color: #f8f9fa; /* Couleur de fond */
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Pour occuper toute la hauteur de la fenêtre */
+        }
+        .card {
+            max-width: 400px; /* Largeur maximale de la carte */
+            width: 100%; /* Largeur de la carte */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Ombre de la carte */
+        }
+    </style>
+</head>
+
+<body class="loading authentication-bg" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+    <div class="container">
+        <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5">
+            <div class="row justify-content-center">
+                <div class="col-xxl-4 col-lg-5">
+                    <div class="card">
+                        <!-- Logo -->
+                        <div class="card-header pt-4 pb-4 text-center bg-primary">
+                            <a href="index.html">
+                                <span><img src="static/images/logo.png" alt="" height="18"></span>
+                            </a>
+                        </div>
+
+                        <div class="card-body p-4">
+                            <div class="text-center w-75 m-auto">
+                                <h4 class="text-dark-50 text-center pb-0 fw-bold">code de récupération</h4>
+                                <p class="text-muted mb-4">Demande de réinitialisation de mot de passe.</p>
+                            </div>
+
+                            <form action="/verify_code" method="POST">
+                                <div class="mb-3">
+                                    <label for="code" class="form-label">Code de récupération</label>
+                                    <input name="code" type="text" id="Code" class="form-control" placeholder="Entrez le code reçu par e-mail" required>
+                                </div>
+                            
+                                <div class="mb-3 mb-0 text-center">
+                                    <button class="btn btn-primary" type="submit">Valider le code de récupération</button>
+                                </div>
+                            </form>
+                                                       
+                            
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+
+                    <!-- <div class="row mt-3">
+                        <div class="col-12 text-center">
+                            <p class="text-muted">Vous n'avez pas de compte ? <a href="Register.html" class="text-muted ms-1"><b>S'inscrire</b></a></p>
+                        </div> 
+                    </div>  -->
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+        </div> <!-- end account-pages -->
+    </div> <!-- end container -->
+
+    <!-- Footer -->
+    <footer class="footer footer-alt">
+        <p>© 2024 <a href="#">GOUA</a> Tous droits réservés</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="static/js/vendor.min.js"></script>
+    <script src="static/js/app.min.js"></script>
+</body>
+</html>

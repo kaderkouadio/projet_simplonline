@@ -1,0 +1,359 @@
+            <!-- ========== Left Sidebar Start ========== -->
+
+<!--********************** Dashboards Administrateur  ******************************* -->
+
+
+            {% if utilisateurs.Roles == 'Administrateur'%}
+            <div class="leftside-menu">
+    
+                <!-- LOGO -->
+                <a href="index.html" class="logo text-center logo-light">
+                    <span class="logo-lg">
+                        <img src="assets/images/logo.png" alt="" height="16">
+                    </span>
+                    <span class="logo-sm">
+                        <img src="assets/images/logo_sm.png" alt="" height="16">
+                    </span>
+                </a>
+
+                <!-- LOGO -->
+                <a href="index.html" class="logo text-center logo-dark">
+                    <span class="logo-lg">
+                        <img src="assets/images/logo-dark.png" alt="" height="16">
+                    </span>
+                    <span class="logo-sm">
+                        <img src="assets/images/logo_sm_dark.png" alt="" height="16">
+                    </span>
+                </a>
+    
+                <div class="h-100" id="leftside-menu-container" data-simplebar="">
+
+                    <!--- Sidemenu -->
+                    <ul class="side-nav">
+
+                        <li class="side-nav-title side-nav-item">GOUA</li>
+
+                        <li class="side-nav-item">
+                            <a href="{{ url_for('dashboardcrm') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="uil-home-alt"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span> Dashboards </span>
+                            </a>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a href="{{ url_for('produit') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="uil-home-alt"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span> Produit </span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="{{ url_for('vente') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="uil-home-alt"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span> Vente </span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="{{ url_for('client') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="uil-home-alt"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span> Client </span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="{{ url_for('fournisseur') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="uil-home-alt"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span> Fournisseur </span>
+                            </a>
+                        </li>
+                    
+                        <li class="side-nav-item">
+                            <a href="{{ url_for('stock') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="uil-home-alt"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span> stock </span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="{{ url_for('Listeutilisateurs') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="uil-home-alt"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span> Utilisateurs </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <li class="side-nav-item">
+                        <a href="{{ url_for('Rapport') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                            <i class="uil-home-alt"></i>
+                            <span class="badge bg-success float-end"></span>
+                            <span> Rapport</span>
+                        </a>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="{{ url_for('prediction') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                            <i class="uil-home-alt"></i>
+                            <span class="badge bg-success float-end"></span>
+                            <span> prediction</span>
+                        </a>
+                    </li>
+                    <!--<li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPersonnels" aria-expanded="false" aria-controls="sidebarPersonnels" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Personnels </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPersonnels">
+                            <ul class="side-nav-second-level">
+                                <li>
+                                    <a href="apps-Personnels-utilisateur.html">utilisateurs</a>
+                                </li>
+                                <li>
+                                    <a href="apps-Personnels-Administrateur.html">Administrateurs</a>
+                                </li>
+                                <li>
+                                    <a href="apps-Personnels-Gestionnaire.html">Gestionnaires</a>
+                                </li>
+                                <li>
+                                    <a href="apps-Personnels-Caissier.html">Caissier</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>-->
+                
+
+                    <!-- End Sidebar -->
+
+                    <div class="clearfix"></div>
+
+                </div>
+                <!-- Sidebar -left -->
+
+
+<!--********************** Dashboards Caissier(vendeur)  ******************************* -->
+
+            </div>
+            {% elif utilisateurs.Roles == 'Caissier'%}
+                <div class="leftside-menu">
+        
+                    <!-- LOGO -->
+                    <a href="index.html" class="logo text-center logo-light">
+                        <span class="logo-lg">
+                            <img src="assets/images/logo.png" alt="" height="16">
+                        </span>
+                        <span class="logo-sm">
+                            <img src="assets/images/logo_sm.png" alt="" height="16">
+                        </span>
+                    </a>
+
+                    <!-- LOGO -->
+                    <a href="index.html" class="logo text-center logo-dark">
+                        <span class="logo-lg">
+                            <img src="assets/images/logo-dark.png" alt="" height="16">
+                        </span>
+                        <span class="logo-sm">
+                            <img src="assets/images/logo_sm_dark.png" alt="" height="16">
+                        </span>
+                    </a>
+        
+                    <div class="h-100" id="leftside-menu-container" data-simplebar="">
+
+                        <!--- Sidemenu -->
+                        <ul class="side-nav">
+
+                            <li class="side-nav-title side-nav-item">GOUA</li>
+
+                            <li class="side-nav-item">
+                                <a href="{{ url_for('dashboardcrm') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                    <i class="uil-home-alt"></i>
+                                    <span class="badge bg-success float-end"></span>
+                                    <span> Dashboards </span>
+                                </a>
+                            </li>
+
+                            
+                            <li class="side-nav-item">
+                                <a href="{{ url_for('vente') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                    <i class="uil-home-alt"></i>
+                                    <span class="badge bg-success float-end"></span>
+                                    <span> Vente </span>
+                                </a>
+                            </li>
+                            <!---<li class="side-nav-item">
+                                <a href="{{ url_for('client') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                    <i class="uil-home-alt"></i>
+                                    <span class="badge bg-success float-end"></span>
+                                    <span> Client </span>
+                                </a>
+                            </li>
+                            
+                        
+                            <!--- Sidemenu<li class="side-nav-item">
+                                <a href="{{ url_for('stock') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                    <i class="uil-home-alt"></i>
+                                    <span class="badge bg-success float-end"></span>
+                                    <span> stock </span>
+                                </a>
+                            </li>-->
+                            <!--- Sidemenu<li class="side-nav-item">
+                                <a href="{{ url_for('Listeutilisateurs') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                    <i class="uil-home-alt"></i>
+                                    <span class="badge bg-success float-end"></span>
+                                    <span> Utilisateurs </span>
+                                </a>
+                            </li>-->
+                        </ul>
+                        <!--<li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarPersonnels" aria-expanded="false" aria-controls="sidebarPersonnels" class="side-nav-link">
+                                <i class="uil-store"></i>
+                                <span> Personnels </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarPersonnels">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="apps-Personnels-utilisateur.html">utilisateurs</a>
+                                    </li>
+                                    <li>
+                                        <a href="apps-Personnels-Administrateur.html">Administrateurs</a>
+                                    </li>
+                                    <li>
+                                        <a href="apps-Personnels-Gestionnaire.html">Gestionnaires</a>
+                                    </li>
+                                    <li>
+                                        <a href="apps-Personnels-Caissier.html">Caissier</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>-->
+                    
+                        <!-- End Sidebar -->
+
+                    </div>
+                    <!-- Sidebar -left -->
+
+                </div>
+
+
+  <!--********************** Dashboards Gestionnaire  ******************************* -->
+
+
+            {% elif utilisateurs.Roles == 'Gestionnaire_de_Stocks'%}
+                <div class="leftside-menu">
+            
+                    <!-- LOGO -->
+                    <a href="index.html" class="logo text-center logo-light">
+                        <span class="logo-lg">
+                            <img src="assets/images/logo.png" alt="" height="16">
+                        </span>
+                        <span class="logo-sm">
+                            <img src="assets/images/logo_sm.png" alt="" height="16">
+                        </span>
+                    </a>
+
+                    <!-- LOGO -->
+                    <a href="index.html" class="logo text-center logo-dark">
+                        <span class="logo-lg">
+                            <img src="assets/images/logo-dark.png" alt="" height="16">
+                        </span>
+                        <span class="logo-sm">
+                            <img src="assets/images/logo_sm_dark.png" alt="" height="16">
+                        </span>
+                    </a>
+        
+                    <div class="h-100" id="leftside-menu-container" data-simplebar="">
+
+                        <!--- Sidemenu -->
+                        <ul class="side-nav">
+
+                            <li class="side-nav-title side-nav-item">GOUA</li>
+
+                            <!--- <li class="side-nav-item">
+                                <a href="{{ url_for('dashboard') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                    <i class="uil-home-alt"></i>
+                                    <span class="badge bg-success float-end"></span>
+                                    <span> Dashboards </span>
+                                </a>
+                            </li>-->
+
+                            <li class="side-nav-item">
+                                <a href="{{ url_for('produit') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                    <i class="uil-home-alt"></i>
+                                    <span class="badge bg-success float-end"></span>
+                                    <span> Produit </span>
+                                </a>
+                            </li>
+                            <li class="side-nav-item">
+                                <a href="{{ url_for('stock') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                    <i class="uil-home-alt"></i>
+                                    <span class="badge bg-success float-end"></span>
+                                    <span> stock </span>
+                                </a>
+                            </li>
+                            <!--- <li class="side-nav-item">
+                                <a href="{{ url_for('vente') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                    <i class="uil-home-alt"></i>
+                                    <span class="badge bg-success float-end"></span>
+                                    <span> Vente </span>
+                                </a>
+                            </li> -->
+
+                            <!---<li class="side-nav-item">
+                                <a href="{{ url_for('client') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                    <i class="uil-home-alt"></i>
+                                    <span class="badge bg-success float-end"></span>
+                                    <span> Client </span>
+                                </a>
+                            </li>-->
+                            <!---<li class="side-nav-item">
+                                <a href="{{ url_for('fournisseur') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                    <i class="uil-home-alt"></i>
+                                    <span class="badge bg-success float-end"></span>
+                                    <span> Fournisseur </span>
+                                </a>
+                            </li>-->
+                            <!---<li class="side-nav-item">
+                                <a href="{{ url_for('Listeutilisateurs') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                    <i class="uil-home-alt"></i>
+                                    <span class="badge bg-success float-end"></span>
+                                    <span> Utilisateurs </span>
+                                </a>
+                            </li>-->
+                        </ul>
+                          <!--<li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarPersonnels" aria-expanded="false" aria-controls="sidebarPersonnels" class="side-nav-link">
+                                <i class="uil-store"></i>
+                                <span> Personnels </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarPersonnels">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="apps-Personnels-utilisateur.html">utilisateurs</a>
+                                    </li>
+                                    <li>
+                                        <a href="apps-Personnels-Administrateur.html">Administrateurs</a>
+                                    </li>
+                                    <li>
+                                        <a href="apps-Personnels-Gestionnaire.html">Gestionnaires</a>
+                                    </li>
+                                    <li>
+                                        <a href="apps-Personnels-Caissier.html">Caissier</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>-->
+                    
+
+                        <!-- End Sidebar -->
+
+                        <div class="clearfix"></div>
+
+                    </div>
+                    <!-- Sidebar -left -->
+
+                </div>
+                {% endif%}
+            <!-- Left Sidebar End -->

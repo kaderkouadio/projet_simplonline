@@ -1,0 +1,628 @@
+  
+/******** Debut-Navbar *********/
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+}
+
+body{
+  height: 100vh; 
+  background-image:url(https://images.pexels.com/photos/13398438/pexels-photo-13398438.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load);
+  background-size:cover;
+  background-position:center;
+}
+li
+
+{
+  list-style: none;
+}
+a
+{
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem; 
+}
+a:hover
+{
+  color: #63C7B2;
+}
+header
+{
+  position: relative;
+  padding: 0 2rem;
+  background-color: rgba(0, 0, 0, 0.238);
+}
+.navbar
+{
+  width: 100%;
+  max-width: 1200px;
+  height:60px ;
+  margin: 0 auto; 
+  display: flex;
+  align-items:center ;
+  justify-content: space-evenly;
+}
+.navbar .logo a
+{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.navbar .links
+{
+  display: flex;
+  gap: 2rem;
+}
+.navbar .burger-menu-buttonnav
+{
+  color:#fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+}
+.buttonsnavbar
+{
+  display: flex;
+  gap: 10px;
+}
+.action-buttonsnavbar
+{
+  background-color: #63C7B2;
+  color: #120d31;
+  border:1px solid #63C7B2 ;
+  padding:0.5rem 1.2rem ;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight:bold;
+  cursor: pointer;
+}
+.action-buttonsnavbar:hover
+{
+  color:#fff;
+  border: 1px solid #fff;
+
+}
+.connect
+{
+  background-color: transparent;
+  color: #fff;
+  border:1px solid #fff ;
+}
+.connect:hover
+{
+  background-color: #fff;
+  color:#120d31 ;
+}
+/**----------burger-menu---------**/
+.burger-menu
+ {
+  display: none; 
+  height: 0 ;
+  position: absolute;
+  right: 2rem;
+  top: 60px;
+  width: 200px;
+  background:rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  overflow: hidden;
+  transition:height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) ;
+}
+
+.burger-menu.open
+{
+  height: 310px;
+
+}
+.burger-menu li
+{
+  padding: 0.7em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divide
+{
+  height: 1px;
+  background-color: #fff;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+
+}
+.burger-menu .action-buttonsnavbar
+{
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.buttonsnavbar-burger-menu
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+/**----------Responsive---------*/
+@media (max-width:990px) 
+{
+  header{
+    background: none;
+  }
+  .navbar .links,
+  .navbar .action-buttonsnavbar
+  {
+    display: none;
+  }
+  .navbar .burger-menu-buttonnav
+  {
+    display: block;
+  }
+  .burger-menu
+  {
+    display: block;
+  }
+}
+
+/******** Fin-Navbar *********/
+
+
+  
+/******** Debut-Login *********/
+ 
+ /* Réinitialisation des styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+/* Style du body */
+body {
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #1f293a;
+}
+
+
+.container-Login {
+  height: 90vh;
+  max-width: 500px;
+  width: 50%;
+  background-color: #393232;
+  padding: 25px 30px; 
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 10px;
+
+}
+/* Conteneur principal */
+
+
+.container_L {
+  position: relative;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style de la boîte de connexion */
+.login-box {
+  position: relative;
+  width: 300px;
+}
+
+/* Style du titre */
+h2 {
+  font-size: 2em;
+  color: #0ef;
+  text-align: center;
+}
+
+/* Style du formulaire */
+.login-box form {
+  width: 100%;
+  padding: 0 0px;
+}
+
+/* Style de la boîte de saisie */
+.input-box {
+  position: relative;
+  margin: 25px 0;
+}
+
+/* Style de l'entrée de saisie */
+.input-box input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: 2px solid #2c4766;
+  outline: none;
+  border-radius: 40px;
+  font-size: 1em;
+  padding: 0 20px;
+  transition: .5s ease;
+  color: #fff;
+}
+
+/* Style de l'étiquette de saisie */
+.input-box label {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color: #fff;
+  transition: .5s ease;
+}
+
+/* Animation pour l'étiquette de saisie */
+.input-box input:focus~label,
+.input-box input:valid~label {
+  top: 1px;
+  font-size: .8em;
+  background: #1f293a;
+  color: #fff;
+  padding: 0 6px;
+}
+
+/* Style du lien de mot de passe oublié */
+.forget-pass {
+  margin: -15px 0 10px;
+  text-align: center;
+}
+
+.forget-pass a {
+  font-size: .85em;
+  color: #fff;
+  text-decoration: none;
+}
+
+.forget-pass a:hover {
+  text-decoration: underline;
+}
+
+/* Style du bouton de connexion */
+.btn_Login {
+  width: 100%;
+  height: 45px;
+  background: #0ef;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #1f293a;
+  font-weight: 600;
+}
+
+/* Style du lien d'inscription */
+.signup-link {
+  margin: 20px 0 10px;
+  text-align: center;
+}
+
+.signup-link a {
+  font-size: 1em;
+  color: #0ef;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+/* Animation pour les barres */
+.container_L span {
+  position: absolute;
+  left: 0;
+  width: 30px;
+  height: 5px;
+  background: #2c4766;
+  border-radius: 8px;
+  transform-origin: 125px;
+  left: 40%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(2.2) rotate(calc(var(--i) * 360deg / 50));
+}
+
+.container_L .anim span {
+  animation: animate 3s linear infinite;
+  animation-delay: calc(var(--i) * (3s / 50));
+}
+
+/* Animation des barres */
+@keyframes animate {
+  0% {
+    background: #0ef;
+  }
+  25% {
+    background: #2c4766;
+  }
+}
+
+/******** Fin-Login *********/
+
+
+ 
+
+/******** Debut-Register *********/
+
+/* Import de la police de caractères depuis Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+/* Réinitialisation des styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Utilisation de la police de caractères Poppins pour tout le document */
+body {
+  font-family: 'Poppins', sans-serif;
+  /* height: 100vh;
+  display: flex; */
+  justify-content: center;
+  align-items: center;
+  padding: 10px;  
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+/* Conteneur principal du formulaire d'inscription */
+.container-register {
+  height: 100vh;
+  max-width: 800px;
+  width: 50%;
+  background-color: #fff;
+  padding: 25px 30px; 
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+/* Style du titre du formulaire */
+.container-register .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+
+/* Barre décorative sous le titre */
+.container-register .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+/* Conteneur pour les détails de l'utilisateur */
+.content-register form .user-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 10px 0 12px 0;
+}
+
+/* Boîte de saisie des détails de l'utilisateur */
+form .user-details .input-box {
+  margin-bottom: 10px;
+  width: calc(40% - 10px); /* 50% de largeur avec un espacement de 20px */
+}
+
+/* Texte pour les détails de l'utilisateur */
+form .input-box span.details {
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+/* Style des champs de saisie */
+.user-details .input-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+/* Style des champs de saisie lorsqu'ils sont focus ou valides */
+.user-details .input-box input:focus,
+.user-details .input-box input:valid {
+  border-color: #9b59b6;
+}
+
+/* Style des boutons radio pour la sélection du genre */
+form .genre-details .genre-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* Conteneur pour les boutons radio */
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+
+/* Style des boutons radio */
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Style des points des boutons radio */
+form .category label .dot {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background: #d9d9d9;
+  border: 5px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Style des points des boutons radio sélectionnés */
+#dot-1:checked ~ .category label .one .dot,
+#dot-2:checked ~ .category label .two .dot,
+#dot-3:checked ~ .category label .three .dot {
+  background: #9b59b6;
+  border-color: #d9d9d9;
+}
+
+/* Masquage des boutons radio */
+form input[type="radio"] {
+  display: none;
+}
+
+/* Style du bouton d'envoi */
+form .button {
+  height: 45px;
+  margin: 35px 0;
+}
+
+/* Style du bouton d'envoi au survol */
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #242121;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+/* Style du bouton d'envoi au survol */
+form .button input:hover {
+  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+}
+
+/* Media Queries */
+@media (max-width: 584px) {
+  .container-register {
+    width: 100%;
+  }
+
+  form .user-details .input-box {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  form .category {
+    width: 100%;
+  }
+
+  .content-register form .user-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .user-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+
+@media (max-width: 459px) {
+  .container-register .content .category {
+    flex-direction: column;
+  }
+}
+
+
+
+/* Style du footer */
+footer {
+  background-color: #333; 
+  color: #fff; 
+  padding: 50px 0; 
+}
+
+/* Style du contenu du footer */
+footer .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Style des boîtes gauche et droite */
+footer .content .box {
+  width: 45%; 
+  margin-bottom: 20px; 
+}
+
+/* Style des sujets */
+footer .content .topic {
+  font-size: 20px; 
+  font-weight: bold; 
+  margin-bottom: 15px;
+}
+
+/* Style des icônes */
+footer .content .media-icons a {
+  color: #fff; 
+  font-size: 20px; 
+  margin-right: 10px; 
+}
+
+/* Style du bas du footer */
+footer .bottom {
+  text-align: center; 
+  margin-top: 30px; 
+  font-size: 14px;
+}
+
+/* Style du lien du bas du footer */
+footer .bottom a {
+  color: #fff; 
+  text-decoration: none; 
+}
+
+/* Style du lien du bas du footer au survol */
+footer .bottom a:hover {
+  text-decoration: underline; 
+}
+
+
+
+
+
+
+.visible{
+  display: block;
+}
+
+
+
+

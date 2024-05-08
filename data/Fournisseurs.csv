@@ -1,0 +1,135 @@
+IdFournisseurs,NomEntreprise,Nom_Contact,Adresse,Telephone,Email,Mode_paiement
+1,Novapole,Kwame Mensah,Lagos,1234567890,novapole@gmail.com,Carte de Crédit
+2,Ma Maison Ma Vie,Fatima Diop,Le Caire,4567890123,mamaisonmavie@gmail.com,Virement Bancaire
+3,Optimal Medical,Chukwu Emeka,Kinshasa,7890123456,optimalmedical@gmail.com,Mobile money
+4,Eveil Plus,Abdoulaye Traoré,Johannesburg,2345678901,eveilplus@gmail.com,Carte de Crédit
+5,Epsidrive,Nneka Okoro,Nairobi,5678901234,epsidrive@gmail.com,Virement Bancaire
+6,Ivory Explore,Mohamed Kamara,Le Cap,8901234567,ivoryexplore@gmail.com,Espece
+7,Naghadeff,Aisha Ibrahim,Casablanca,1234567890,naghadeff@gmail.com,Mobile money
+8,Zoro App,Amara Sow,Accra,3456789012,zoroapp@gmail.com,Carte de Crédit
+9,Hackathons,Musa Bello,Abidjan,6789012345,hackathons@gmail.com,Virement Bancaire
+10,Tchep,Lola Adeyemi,Addis-Abeba,9012345678,tchep@gmail.com,Espece
+11,Hakradjoh,Oluwaseun Adekunle,Lagos,2345678901,hakradjoh@gmail.com,Carte de Crédit
+12,Pouess Robot,Nomusa Mhlongo,Le Caire,5678901234,pouessrobot@gmail.com,Virement Bancaire
+13,Koumassi Code,Moussa Toure,Kinshasa,8901234567,koumassicode@gmail.com,Mobile money
+14,Talent,Fatoumata Traoré,Johannesburg,9012345678,talent@gmail.com,Carte de Crédit
+1,TechNova Solutions,Kwame Mensah,Lagos,1234567890,technova@gmail.com,Carte de Crédit
+2,GreenTech Ventures,Fatima Diop,Le Caire,4567890123,greentech@gmail.com,Virement Bancaire
+3,EcoEssence Foods,Chukwu Emeka,Kinshasa,7890123456,ecoessence@gmail.com,Mobile money
+4,GlobeTrekker Logistics,Abdoulaye Traoré,Johannesburg,2345678901,globetrekker@gmail.com,Carte de Crédit
+5,InnoPrint Solutions,Nneka Okoro,Nairobi,5678901234,innoprint@gmail.com,Virement Bancaire
+6,BioMedic Supplies,Mohamed Kamara,Le Cap,8901234567,biomedic@gmail.com,Espece
+7,ArtisanCraft Home,Aisha Ibrahim,Casablanca,1234567890,artisancraft@gmail.com,Mobile money
+8,TechGear Emporium,Amara Sow,Accra,3456789012,techgear@gmail.com,Carte de Crédit
+9,Nature's Best,Musa Bello,Abidjan,6789012345,naturesbest@gmail.com,Virement Bancaire
+10,FashionFusion,Lola Adeyemi,Addis-Abeba,9012345678,fashionfusion@gmail.com,Espece
+11,TechNova Solutions,Oluwaseun Adekunle,Lagos,2345678901,technova@gmail.com,Carte de Crédit
+12,GreenTech Ventures,Nomusa Mhlongo,Le Caire,5678901234,greentech@gmail.com,Virement Bancaire
+13,EcoEssence Foods,Moussa Toure,Kinshasa,8901234567,ecoessence@gmail.com,Mobile money
+14,GlobeTrekker Logistics,Fatoumata Traoré,Johannesburg,9012345678,globetrekker@gmail.com,Carte de Crédit
+15,InnoPrint Solutions,Obinna Okafor,Nairobi,1234567890,innoprint@gmail.com,Virement Bancaire
+16,BioMedic Supplies,Chinwe Okonkwo,Le Cap,3456789012,biomedic@gmail.com,Espece
+17,ArtisanCraft Home,Mohamed Ahmed,Casablanca,6789012345,artisancraft@gmail.com,Mobile money
+18,TechGear Emporium,Mariam Ba,Accra,8901234567,techgear@gmail.com,Carte de Crédit
+19,Nature's Best,Saidou Diallo,Abidjan,123456789,naturesbest@gmail.com,Virement Bancaire
+20,FashionFusion,Tunde Adewale,Addis-Abeba,2345678901,fashionfusion@gmail.com,Espece
+1,AlphaTech Solutions,Kwame Mensah,Lagos,1234567890,alphatech@gmail.com,Carte de Crédit
+2,BrightIdeas Innovations,Fatima Diop,Le Caire,4567890123,brightideas@gmail.com,Virement Bancaire
+3,CosmoCraft Creations,Chukwu Emeka,Kinshasa,7890123456,cosmocraft@gmail.com,Mobile money
+4,DreamWorks Dynamics,Abdoulaye Traoré,Johannesburg,2345678901,dreamworks@gmail.com,Carte de Crédit
+5,EcoVibe Ventures,Nneka Okoro,Nairobi,5678901234,ecovibe@gmail.com,Virement Bancaire
+6,FusionTech Solutions,Mohamed Kamara,Le Cap,8901234567,fusiontech@gmail.com,Espece
+7,GlobalLink Logistics,Aisha Ibrahim,Casablanca,1234567890,globallink@gmail.com,Mobile money
+8,HyperDrive Technologies,Amara Sow,Accra,3456789012,hyperdrive@gmail.com,Carte de Crédit
+9,InnoGenius Ventures,Musa Bello,Abidjan,6789012345,innogenius@gmail.com,Virement Bancaire
+10,Jupiter Enterprises,Lola Adeyemi,Addis-Abeba,9012345678,jupiter@gmail.com,Espece
+11,Kinetic Solutions,Oluwaseun Adekunle,Lagos,2345678901,kinetic@gmail.com,Carte de Crédit
+12,Luminous Labs,Nomusa Mhlongo,Le Caire,5678901234,luminous@gmail.com,Virement Bancaire
+13,Moonshot Innovations,Moussa Toure,Kinshasa,8901234567,moonshot@gmail.com,Mobile money
+14,Neptune Dynamics,Fatoumata Traoré,Johannesburg,9012345678,neptune@gmail.com,Carte de Crédit
+15,Orbit Solutions,Oluwaseun Adekunle,Le Cap,1234567890,orbit@gmail.com,Virement Bancaire
+16,PrimeTech Innovations,Chukwu Emeka,Accra,2345678901,primetech@gmail.com,Espece
+17,Quantum Innovations,Aisha Ibrahim,Nairobi,3456789012,quantum@gmail.com,Mobile money
+18,RedShift Solutions,Musa Bello,Casablanca,4567890123,redshift@gmail.com,Carte de Crédit
+19,Sunrise Dynamics,Fatima Diop,Abidjan,5678901234,sunrise@gmail.com,Virement Bancaire
+20,TitanTech Ventures,Mohamed Kamara,Le Caire,6789012345,titantech@gmail.com,Espece
+21,Universal Innovations,Nneka Okoro,Johannesburg,7890123456,universal@gmail.com,Mobile money
+22,Velocity Solutions,Abdoulaye Traoré,Kinshasa,8901234567,velocity@gmail.com,Carte de Crédit
+23,WonderWorks Dynamics,Kwame Mensah,Addis-Abeba,9012345678,wonderworks@gmail.com,Virement Bancaire
+24,XenonTech Innovations,Lola Adeyemi,Lagos,1234567890,xenontech@gmail.com,Espece
+25,YetiCraft Creations,Oluwaseun Adekunle,Le Cap,2345678901,yeticraft@gmail.com,Mobile money
+26,Zenith Dynamics,Chukwu Emeka,Nairobi,3456789012,zenith@gmail.com,Carte de Crédit
+27,ApexTech Ventures,Aisha Ibrahim,Casablanca,4567890123,apextech@gmail.com,Virement Bancaire
+28,BoldVision Innovations,Musa Bello,Abidjan,5678901234,boldvision@gmail.com,Espece
+29,ClearSky Solutions,Fatima Diop,Le Caire,6789012345,clearsky@gmail.com,Mobile money
+30,DynamoTech Ventures,Mohamed Kamara,Johannesburg,7890123456,dynamotech@gmail.com,Carte de Crédit
+31,Endeavor Innovations,Nneka Okoro,Kinshasa,8901234567,endeavor@gmail.com,Virement Bancaire
+32,ForwardTech Solutions,Abdoulaye Traoré,Accra,9012345678,forwardtech@gmail.com,Espece
+33,GlobeCraft Creations,Lola Adeyemi,Addis-Abeba,1234567890,globecraft@gmail.com,Mobile money
+34,Horizon Dynamics,Oluwaseun Adekunle,Lagos,2345678901,horizon@gmail.com,Carte de Crédit
+35,InnovateTech Ventures,Chukwu Emeka,Le Cap,3456789012,innovatetech@gmail.com,Virement Bancaire
+36,Jumpstart Innovations,Aisha Ibrahim,Nairobi,4567890123,jumpstart@gmail.com,Espece
+37,KaleidoTech Solutions,Musa Bello,Casablanca,5678901234,kaleidotech@gmail.com,Mobile money
+38,Limitless Dynamics,Fatima Diop,Abidjan,6789012345,limitless@gmail.com,Carte de Crédit
+39,Momentum Innovations,Mohamed Kamara,Le Caire,7890123456,momentum@gmail.com,Virement Bancaire
+40,NexusTech Ventures,Nneka Okoro,Johannesburg,8901234567,nexustech@gmail.com,Espece
+41,Optimize Solutions,Abdoulaye Traoré,Kinshasa,9012345678,optimize@gmail.com,Mobile money
+42,PhoenixTech Innovations,Lola Adeyemi,Accra,1234567890,phoenixtech@gmail.com,Carte de Crédit
+43,Quantum Leap Dynamics,Oluwaseun Adekunle,Addis-Abeba,2345678901,quantumleap@gmail.com,Virement Bancaire
+44,RapidTech Ventures,Chukwu Emeka,Lagos,3456789012,rapidtech@gmail.com,Espece
+45,Spectrum Innovations,Aisha Ibrahim,Le Cap,4567890123,spectrum@gmail.com,Mobile money
+46,TranscendTech Solutions,Musa Bello,Nairobi,5678901234,transcendtech@gmail.com,Carte de Crédit
+47,Unified Dynamics,Fatima Diop,Casablanca,6789012345,unified@gmail.com,Virement Bancaire
+48,VisionTech Ventures,Mohamed Kamara,Abidjan,7890123456,visiontech@gmail.com,Espece
+49,WiseCraft Creations,Nneka Okoro,Le Caire,8901234567,wisecraft@gmail.com,Mobile money
+50,Xenon Innovations,Abdoulaye Traoré,Johannesburg,9012345678,xenon@gmail.com,Carte de Crédit
+51,YonderTech Solutions,Lola Adeyemi,Kinshasa,1234567890,yondertech@gmail.com,Virement Bancaire
+52,Zenith Dynamics,Oluwaseun Adekunle,Accra,2345678901,zenithdynamics@gmail.com,Espece
+53,ApexTech Innovations,Chukwu Emeka,Addis-Abeba,3456789012,apextech@gmail.com,Mobile money
+54,BoldVision Ventures,Aisha Ibrahim,Lagos,4567890123,boldvision@gmail.com,Carte de Crédit
+55,ClearSky Solutions,Musa Bello,Le Cap,5678901234,clearsky@gmail.com,Virement Bancaire
+56,DynamoTech Innovations,Fatima Diop,Nairobi,6789012345,dynamotech@gmail.com,Espece
+57,Endeavor Ventures,Mohamed Kamara,Casablanca,7890123456,endeavor@gmail.com,Mobile money
+58,ForwardTech Innovations,Nneka Okoro,Abidjan,8901234567,forwardtech@gmail.com,Carte de Crédit
+59,GlobeCraft Solutions,Abdoulaye Traoré,Le Caire,9012345678,globecraft@gmail.com,Virement Bancaire
+60,Horizon Innovations,Oluwaseun Adekunle,Johannesburg,1234567890,horizon@gmail.com,Espece
+61,InnovateTech Innovations,Chukwu Emeka,Kinshasa,2345678901,innovatetech@gmail.com,Mobile money
+62,Jumpstart Ventures,Aisha Ibrahim,Accra,3456789012,jumpstart@gmail.com,Carte de Crédit
+63,KaleidoTech Innovations,Musa Bello,Addis-Abeba,4567890123,kaleidotech@gmail.com,Virement Bancaire
+64,Limitless Ventures,Fatima Diop,Lagos,5678901234,limitless@gmail.com,Espece
+65,Momentum Ventures,Mohamed Kamara,Le Cap,6789012345,momentum@gmail.com,Mobile money
+66,NexusTech Innovations,Nneka Okoro,Nairobi,7890123456,nexustech@gmail.com,Carte de Crédit
+67,Optimize Innovations,Abdoulaye Traoré,Casablanca,8901234567,optimize@gmail.com,Virement Bancaire
+68,PhoenixTech Solutions,Lola Adeyemi,Abidjan,9012345678,phoenixtech@gmail.com,Espece
+69,Quantum Leap Innovations,Oluwaseun Adekunle,Le Caire,1234567890,quantumleap@gmail.com,Mobile money
+70,RapidTech Innovations,Chukwu Emeka,Johannesburg,2345678901,rapidtech@gmail.com,Carte de Crédit
+71,Spectrum Ventures,Aisha Ibrahim,Kinshasa,3456789012,spectrum@gmail.com,Virement Bancaire
+72,TranscendTech Innovations,Musa Bello,Accra,4567890123,transcendtech@gmail.com,Espece
+73,Unified Solutions,Fatima Diop,Addis-Abeba,5678901234,unified@gmail.com,Mobile money
+74,VisionTech Innovations,Mohamed Kamara,Le Cap,6789012345,visiontech@gmail.com,Carte de Crédit
+75,WiseCraft Innovations,Nneka Okoro,Nairobi,7890123456,wisecraft@gmail.com,Virement Bancaire
+76,Xenon Ventures,Abdoulaye Traoré,Casablanca,8901234567,xenon@gmail.com,Espece
+77,YonderTech Innovations,Lola Adeyemi,Abidjan,9012345678,yondertech@gmail.com,Mobile money
+78,Zenith Innovations,Oluwaseun Adekunle,Le Caire,1234567890,zenithinnovations@gmail.com,Carte de Crédit
+79,ApexTech Solutions,Chukwu Emeka,Johannesburg,2345678901,apextech@gmail.com,Virement Bancaire
+80,BoldVision Innovations,Aisha Ibrahim,Kinshasa,3456789012,boldvision@gmail.com,Espece
+81,ClearSky Ventures,Musa Bello,Accra,4567890123,clearsky@gmail.com,Mobile money
+82,DynamoTech Innovations,Fatima Diop,Addis-Abeba,5678901234,dynamotech@gmail.com,Carte de Crédit
+83,Endeavor Innovations,Mohamed Kamara,Le Cap,6789012345,endeavor@gmail.com,Virement Bancaire
+84,ForwardTech Innovations,Nneka Okoro,Nairobi,7890123456,forwardtech@gmail.com,Espece
+85,GlobeCraft Ventures,Abdoulaye Traoré,Casablanca,8901234567,globecraft@gmail.com,Mobile money
+86,Horizon Innovations,Oluwaseun Adekunle,Abidjan,9012345678,horizon@gmail.com,Carte de Crédit
+87,InnovateTech Solutions,Chukwu Emeka,Kinshasa,1234567890,innovatetech@gmail.com,Virement Bancaire
+88,Jumpstart Ventures,Aisha Ibrahim,Johannesburg,2345678901,jumpstart@gmail.com,Espece
+89,KaleidoTech Innovations,Musa Bello,Le Caire,3456789012,kaleidotech@gmail.com,Mobile money
+90,Limitless Ventures,Fatima Diop,Addis-Abeba,4567890123,limitless@gmail.com,Carte de Crédit
+91,Momentum Innovations,Mohamed Kamara,Le Cap,5678901234,momentum@gmail.com,Virement Bancaire
+92,NexusTech Innovations,Nneka Okoro,Nairobi,6789012345,nexustech@gmail.com,Espece
+93,Optimize Innovations,Abdoulaye Traoré,Casablanca,7890123456,optimize@gmail.com,Mobile money
+94,PhoenixTech Ventures,Lola Adeyemi,Abidjan,8901234567,phoenixtech@gmail.com,Carte de Crédit
+95,Quantum Leap Solutions,Oluwaseun Adekunle,Addis-Abeba,9012345678,quantumleap@gmail.com,Virement Bancaire
+96,RapidTech Innovations,Chukwu Emeka,Johannesburg,1234567890,rapidtech@gmail.com,Espece
+97,Spectrum Innovations,Aisha Ibrahim,Kinshasa,2345678901,spectrum@gmail.com,Mobile money
+98,TranscendTech Ventures,Musa Bello,Accra,3456789012,transcendtech@gmail.com,Carte de Crédit
+99,Unified Solutions,Fatima Diop,Addis-Abeba,4567890123,unified@gmail.com,Virement Bancaire
+100,VisionTech Innovations,Mohamed Kamara,Le Cap,5678901234,visiontech@gmail.com,Espece
