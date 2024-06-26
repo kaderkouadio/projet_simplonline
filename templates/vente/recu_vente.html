@@ -1,0 +1,554 @@
+
+
+<div id="popup121" class="popup121">
+        <div class="popup-content1">
+            <span class="close" id="close-popup11">&times;</span>
+          <p style="color: orange;">Cachet des mentions obligatoires <span class="black-text">FACTURE N°23007Z075</span><span class="orange-text">\0740935</span></p>
+            <div class="signe">
+                <div class="signature"></div>
+                <div class="clients"><p>Date : .................................................</p>
+                    <p>Client : ...................................................</p>
+                    <p>Adresse : .............................................</p>
+                </div>
+            </div>
+            <form>
+              <table>
+                        <thead>
+                            <tr>
+                                <td>Réf</td>
+                                <td>Designation</td>
+                                <td>Quantité</td>
+                                <td>PU TTC</td>
+                                <td>Montant TTC</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                        </tbody>
+                     <thead>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                    </table>
+                <div class="signe1">
+                <div class="signature1">Montant total TTC</div>
+                <div class="total1"></div>
+            </div>
+                <p style="color:orange;">Arreté de la presente facture à la somme de .........................................................</p>
+                 <p style="color:orange;">.....................................................................................................................................................................</p><br>
+                 <p style="color:orange; text-align:center;">Facturation de la TVA non autorisée</p>
+            </form>
+            <div><button class="btn12"><a href="{{url_for('ventes')}}" style="text-decoration:none;
+    color: #fff;">Retour</a></button>
+                <button id="btn111" onclick="printSection('popup121')">Imprimer</button>
+            </div><br>
+        </div>
+</div>
+
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <span class="close" id="close-popup">&times;</span>
+    <h2>Ajout d'une nouvelle vente</h2><br>
+    <div><button id="btn1">Client existant</button>
+      <button id="btn2">Nouveau client</button>
+    </div><br>
+    <form class="form1" id="form1 stock-form" method="post" action="{{url_for('ventes')}}" >
+
+      <label for="client">Client</label>
+      <select id="client" name="client" required>
+        <option value="" disabled selected>Sélectionnez le client</option>
+        {% for client in clients %}
+        <option value="{{ client[0] }}">{{ client[1] }}</option>
+        {% endfor %}
+        <!-- Ajoutez d'autres options selon vos besoins -->
+      </select>
+
+      <label for="produit">Produit</label>
+      <select id="produit" name="produit" required>
+        <option value="" disabled selected>Sélectionnez un produit</option>
+        {% for produit in produits %}
+        <option value="{{ produit[0] }}">{{ produit[1] }}</option>
+        {% endfor %}
+        <!-- Ajoutez d'autres options selon vos besoins -->
+      </select>
+      <label for="nombre">Nombre</label>
+      <input type="number" id="nombre" name="nombre" required>
+      <label for="prix_vente">Entrez le prix unitaire de vente</label>
+      <input type="number" id="prix_vente" name="prix_vente" required>
+
+      <button type="button" id="add-button">Ajouter</button>
+
+      <table id="ventes-table">
+        <thead>
+          <tr>
+            <td>Réf</td>
+            <td>Designation</td>
+            <td>Quantité</td>
+            <td>PU TTC</td>
+            <td>Montant TTC</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- <tr>
+            <td>1</td>
+            <td>Nolovo XP core I5</td>
+            <td>2</td>
+            <td>400 000</td>
+            <td>400 000</td>
+          </tr> -->
+        </tbody>
+      </table>
+      <button type="submit" id="submit-button">Valider la vente</button>
+    </form>
+
+    <form class="form2" id="form2 stock-form" method="post" action="{{url_for('ventes')}}">
+      <label for="nom">Nom et prénoms</label>
+      <input type="text" id="nom" name="nom" required>
+
+      <label for="tel">Téléphone</label>
+      <input type="tel" id="tel" name="tel" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="adresse">Adresse</label>
+      <input type="text" id="adresse" name="adresse" required>
+
+      <label for="produit">Produit</label>
+      <select id="n_produit" name="produit" required>
+        <option value="" disabled selected>Sélectionnez un produit</option>
+        {% for produit in produits %}
+        <option value="{{ produit[0] }}">{{ produit[1] }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="n_nombre">Nombre</label>
+      <input type="number" id="n_nombre" name="nombre" required>
+      <label for="prix_vente">Entrez le prix unitaire de vente</label>
+      <input type="number" id="n_prix_vente" name="prix_vente" required>
+
+      <button type="button" id="add-button1">Ajouter</button>
+
+      <table id="ventes-table1">
+        <thead>
+          <tr>
+            <td>Réf</td>
+            <td>Designation</td>
+            <td>Quantité</td>
+            <td>PU TTC</td>
+            <td>Montant TTC</td>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+      <button type="submit">Valider la vente</button>
+    </form>
+
+  </div>
+</div>
+
+<div id="popup12" class="popup12">
+        <div class="popup-content1">
+            <span class="close" id="close-popup1">&times;</span>
+          <p style="color: orange;">Cachet des mentions obligatoires <span class="black-text">FACTURE N°23007Z075</span><span class="orange-text">\0740935</span></p>
+            <div class="signe">
+                <div class="signature"></div>
+                <div class="clients"><p>Date : .................................................</p>
+                    <p>Client : ...................................................</p>
+                    <p>Adresse : .............................................</p>
+                </div>
+            </div>
+            <form>
+              <table id="stock-table1">
+                        <thead>
+                            <tr>
+                                <td>Réf</td>
+                                <td>Designation</td>
+                                <td>Quantité</td>
+                                <td>PU TTC</td>
+                                <td>Montant TTC</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        </tbody>
+                     <thead>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                    </table>
+                <div class="signe1">
+                <div class="signature1">Montant total TTC</div>
+                <div class="total"></div>
+            </div>
+                <p style="color:orange;">Arreté de la presente facture à la somme de .........................................................</p>
+                 <p style="color:orange;">.....................................................................................................................................................................</p><br>
+                 <p style="color:orange; text-align:center;">Facturation de la TVA non autorisée</p>
+            </form>
+            <div><button class="btn12"><a href="{{url_for('ventes')}}" style="text-decoration:none;
+    color: #fff;">Retour</a></button>
+                <button id="btn11" onclick="printSection('popup12')">Imprimer</button>
+            </div><br>
+        </div>
+</div>
+
+   <script>
+   document.addEventListener('DOMContentLoaded', function() {
+  var addButton = document.querySelector('#add-button');
+  var ventTable = document.querySelector('#ventes-table tbody');
+  var stockTable1 = document.querySelector('#stock-table1 tbody');
+  var submitButton = document.querySelector('button[type="submit"]');
+  var rowNum = 1;
+
+  addButton.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    var produitId = document.querySelector('#produit').value;
+    var nombre = document.querySelector('#nombre').value;
+    var id_client = document.querySelector('#client').value; 
+    var prixVente = document.querySelector('#prix_vente').value;
+    var montantTTC = parseInt(nombre, 10) * parseFloat(prixVente);
+
+    fetch('/get_product_info/' + produitId)
+      .then(response => response.json())
+      .then(data => {
+        var newRow = document.createElement('tr');
+        newRow.innerHTML = '<td>' + produitId + '</td>' +
+                            '<td>' + data.designation + '</td>' +
+                            '<td>' + nombre + '</td>' +
+                            '<td>' + prixVente + '</td>' +
+                            '<td>' + montantTTC + '</td>' +
+                            '<td>' + id_client + '</td>'; 
+
+        var newRow1 = document.createElement('tr');
+        newRow1.innerHTML = '<td>' + rowNum + '</td>' +
+                            '<td>' + data.designation + '</td>' +
+                            '<td>' + nombre + '</td>' +
+                            '<td>' + prixVente + '</td>' +
+                            '<td>' + montantTTC + '</td>';
+
+        ventTable.appendChild(newRow);
+        stockTable1.appendChild(newRow1);
+
+        rowNum++;
+
+        updateTotal();
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération des informations du produit :', error);
+      });
+  });
+
+  // Fonction pour mettre à jour le total
+function updateTotal() {
+    var total = 0;
+    var rows = stockTable1.querySelectorAll('tr');
+
+    // Calculer le total à partir des lignes du tableau 1
+    for (var i = 0; i < rows.length; i++) {
+        var cellValue = rows[i].querySelectorAll('td')[4].textContent;
+        total += parseInt(cellValue);
+    }
+
+    // Mettre à jour le contenu de la balise div avec la classe "total"
+    document.querySelector('.total').textContent = total;
+}
+
+  submitButton.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get all rows from the stock table
+    var rows = ventTable.querySelectorAll('tr');
+
+    // Prepare an array to store order data
+    var orderData = [];
+
+    // Iterate over each row and extract data
+    for (var i = 0; i < rows.length; i++) { // Skip the first header row
+      var rowData = {
+        produit_id: parseInt(rows[i].cells[0].textContent),
+        nombre: parseInt(rows[i].cells[2].textContent),
+        prix_vente: parseFloat(rows[i].cells[3].textContent),
+        montant: parseFloat(rows[i].cells[4].textContent),
+        id_client: parseInt(rows[i].cells[5].textContent), 
+      };
+
+      orderData.push(rowData);
+    }
+
+    // Send the order data to the server using fetch
+    fetch('/submit_vente', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderData) // Convert order data to JSON
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle successful submission response
+        console.log('Commande soumise avec succès:', data);
+
+        // Clear the vente table
+        ventTable.innerHTML = '';
+
+        // Display a success message to the user
+        alert('Vente soumise avec succès!');
+      })
+      .catch(error => {
+        // Handle submission error
+        console.error('Erreur lors de la soumission de la vente:', error);
+
+        // Display an error message to the user
+        alert('Erreur lors de la soumission de la vente.');
+      });
+
+      document.querySelector(".popup12").style.display = "block";
+  });
+});
+</script>
+
+<script>
+function printSection(sectionId) {
+    var printContents = document.getElementById(sectionId).innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  var addButton = document.querySelector('#add-button1');
+  var ventTable = document.querySelector('#ventes-table1 tbody');
+  var stockTable1 = document.querySelector('#stock-table1 tbody');
+  var submitButton = document.querySelector('button[type="submit"]'); // Get the submit button
+  var rowNum = 1;
+
+  addButton.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    var produitId = document.querySelector('#n_produit').value;
+    var nombre = document.querySelector('#n_nombre').value;
+    var prixVente = document.querySelector('#n_prix_vente').value;
+    var montantTTC = parseInt(nombre, 10) * parseFloat(prixVente);
+
+    fetch('/get_product_info/' + produitId)
+      .then(response => response.json())
+      .then(data => {
+        var newRow = document.createElement('tr');
+        newRow.innerHTML = '<td>' + produitId + '</td>' +
+                            '<td>' + data.designation + '</td>' +
+                            '<td>' + nombre + '</td>' +
+                            '<td>' + prixVente + '</td>' +
+                            '<td>' + montantTTC + '</td>' +
+                            '<td>' + data.id_client + '</td>'; // Add supplier ID cell
+
+        var newRow1 = document.createElement('tr');
+        newRow1.innerHTML = '<td>' + rowNum + '</td>' +
+                            '<td>' + data.designation + '</td>' +
+                            '<td>' + nombre + '</td>' +
+                            '<td>' + prixVente + '</td>' +
+                            '<td>' + montantTTC + '</td>';
+
+        ventTable.appendChild(newRow);
+        stockTable1.appendChild(newRow1);
+
+        rowNum++;
+
+        updateTotal();
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération des informations du produit :', error);
+      });
+  });
+
+  // Fonction pour mettre à jour le total
+function updateTotal() {
+    var total = 0;
+    var rows = stockTable1.querySelectorAll('tr');
+
+    // Calculer le total à partir des lignes du tableau 1
+    for (var i = 0; i < rows.length; i++) {
+        var cellValue = rows[i].querySelectorAll('td')[4].textContent;
+        total += parseInt(cellValue);
+    }
+
+    // Mettre à jour le contenu de la balise div avec la classe "total"
+    document.querySelector('.total').textContent = total;
+}
+
+  submitButton.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get all rows from the stock table
+    var rows = ventTable.querySelectorAll('tr');
+
+    // Prepare an array to store order data
+    var orderData = [];
+
+    // Iterate over each row and extract data
+    for (var i = 0; i < rows.length; i++) { // Skip the first header row
+      var rowData = {
+        produit_id: parseInt(rows[i].cells[0].textContent),
+        nombre: parseInt(rows[i].cells[2].textContent),
+        prix_vente: parseFloat(rows[i].cells[3].textContent),
+        montant: parseFloat(rows[i].cells[4].textContent),
+        id_client: parseInt(rows[i].cells[5].textContent), // Supplier ID from cell 5
+      };
+
+      orderData.push(rowData);
+    }
+
+    // Send the order data to the server using fetch
+    fetch('/submit_vente', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderData) // Convert order data to JSON
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle successful submission response
+        console.log('Commande soumise avec succès:', data);
+
+        // Clear the vente table
+        ventTable.innerHTML = '';
+
+        // Display a success message to the user
+        alert('Vente soumise avec succès!');
+      })
+      .catch(error => {
+        // Handle submission error
+        console.error('Erreur lors de la soumission de la vente:', error);
+
+        // Display an error message to the user
+        alert('Erreur lors de la soumission de la vente.');
+      });
+
+      document.querySelector(".popup12").style.display = "block";
+  });
+});
+</script>
+
+<script>
+    // Fonction pour afficher ou masquer la liste déroulante
+function toggleDropdown(link, color) {
+    var select = link.nextElementSibling.querySelector('.select');
+    select.classList.toggle('active');
+    link.style.color = getColor(color); // Mettre à jour la couleur du texte
+
+}
+
+// Fonction pour masquer la liste déroulante et soumettre le formulaire
+function hideDropdownAndSubmit(form, color) {
+    var select = form.querySelector('.select');
+    select.classList.remove('active'); // Masquer la liste déroulante
+    form.submit(); // Soumettre le formulaire
+    link.style.color = getColor(color); // Mettre à jour la couleur du texte
+}
+
+// Fonction pour obtenir la couleur en fonction du statut sélectionné
+function getColor(status) {
+    switch (status) {
+        case 'Vendu':
+            return 'green'; // Vert
+        case 'Retourné':
+            return 'blue'; // Bleu
+        case 'Annuler':
+            return 'red'; // Rouge
+        default:
+            return 'black'; // Noir par défaut
+    }
+}
+</script>
+
+<script>
+    // Sélectionnez tous les boutons "Voir"
+    var voirButtons = document.querySelectorAll(".voir-btn1");
+
+    // Ajoutez un écouteur d'événements à chaque bouton "Voir"
+    voirButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            var rowId = button.getAttribute("data-id");
+            var popup = document.querySelector(".popup121");
+            var rowNum = 1;
+
+            // Faire une requête AJAX pour récupérer les données associées à cette ligne
+            fetch('/donnee_vente/' + rowId)
+                .then(response => response.json())
+                .then(data => {
+                    // Afficher les données dans le popup
+                    // Exemple : mettre les données dans les cellules du tableau dans le popup
+                    var tbody = popup.querySelector('tbody');
+                    tbody.innerHTML = ''; // Effacer le contenu précédent
+
+                    data.forEach(function(item) {
+                        var tr = document.createElement('tr');
+                        tr.innerHTML = '<td>' + item.date_commande + '</td>' +
+                                       '<td>' + item.designation + '</td>' +
+                                       '<td>' + item.quantite + '</td>' +
+                                       '<td>' + item.prix_vente + '</td>' +
+                                       '<td>' + item.montant + '</td>';
+
+                        tbody.appendChild(tr);
+
+                        rowNum++;
+                    });
+
+                    // Afficher le popup
+                    popup.style.display = "block";
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération des données de la ligne:', error);
+                });
+        });
+    });
+</script>

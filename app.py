@@ -12,6 +12,11 @@ from flask_paginate import Pagination, get_page_parameter
 from werkzeug.security import generate_password_hash, check_password_hash
 import plotly.express as px
 
+#************** pour l'envoi des emails*****************
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 
 #************** pour generer de facon fictive des donnees*****************
 # from faker import Faker
@@ -55,11 +60,6 @@ app.config["SQL_SERVER_CONNECTION_STRING"] = """
       
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS 
-
-
-
-
-
 
     
 # *********************** enregistrement***********************
@@ -144,7 +144,7 @@ def connexion():
         # Exécutez une requête SQL pour récupérer l'utilisateur avec l'e-mail et le mot de passe donnés
         cursor.execute("SELECT * FROM Utilisateurs WHERE Email = ? ", (Email))
         utilisateurs = cursor.fetchone()
-        print(utilisateurs)
+        print(utilisateurs) 
 
         if utilisateurs:
             session['IdUtilisateurs'] = utilisateurs[0]
@@ -162,6 +162,23 @@ def connexion():
 
     return render_template('Utilisateurs/login.html')
 
+
+
+# @app.route('/deconnexion')
+# def deconnexion():
+#     # Suppression de toutes les informations stockées dans la session
+#     logout()
+
+#     # Redirection de l'utilisateur vers la page de connexion
+#     return redirect(url_for('connexion'))
+
+
+
+@app.route('/deconnection')
+def deconnection():
+    session.pop('user', None)
+    session.pop('IdUtilisateur', None)
+    return redirect(url_for('connexion'))
 
 
 
@@ -187,7 +204,6 @@ def accueiladmin():
     cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser))
 
     utilisateurs = cursor.fetchone()
-    
     
     return render_template('accueilAdmin/dashboard/dashboard-crm.html',utilisateurs=utilisateurs )
 
@@ -326,8 +342,8 @@ def dashboardcrm():
     best_product = cursor.fetchone()
 
     # Meilleur employé
-    cursor.execute("SELECT TOP 1 Utilisateurs.Nom, Utilisateurs.Prenoms,SUM(Vente.Montant_Total) AS total_sales FROM Vente JOIN Utilisateurs ON Vente.IdUtilisateurs = Utilisateurs.IdUtilisateurs GROUP BY Utilisateurs.Nom,Utilisateurs.Prenoms ORDER BY total_sales DESC")
-    best_employee = cursor.fetchone()
+    # cursor.execute("SELECT TOP 1 Utilisateurs.Nom, Utilisateurs.Prenoms,SUM(Vente.Montant_Total) AS total_sales FROM Vente JOIN Utilisateurs ON Vente.IdUtilisateurs = Utilisateurs.IdUtilisateurs GROUP BY Utilisateurs.Nom,Utilisateurs.Prenoms ORDER BY total_sales DESC")
+    # best_employee = cursor.fetchone()
 
     # Nombre total de ventes par mois/année
     cursor.execute("SELECT YEAR(Dates_vente) AS year, MONTH(Dates_vente) AS month, COUNT(IdVente) AS total_sales FROM Vente GROUP BY YEAR(Dates_vente), MONTH(Dates_vente) ORDER BY year, month")
@@ -425,7 +441,7 @@ def dashboardcrm():
 
     return render_template('accueilAdmin/dashboard/dashboard-crm.html',utilisateurs=utilisateurs,total_client=total_clients,
                            total_produit=total_produits,total_Fournisseurs=total_Fournisseurs, total_Vente=total_Vente,
-                           best_product=best_product, best_employee=best_employee,
+                           best_product=best_product,
                            sales_by_date=sales_by_date, chiffre_affaires=chiffre_affaires, CA_temporel=CA_temporel,
                            total_ventes=total_ventes, ventes_par_mois=ventes_par_mois, chart1 = chart1, chart2=chart2, categories=categories)
 
@@ -438,29 +454,36 @@ def export_produits_pdf():
     IdUser = session.get('IdUtilisateurs')
     connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser))
-    utilisateurs = cursor.fetchone()
+    
+    # Récupérer les données des utilisateurs depuis la base de données
+    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
+    utilisateur = cursor.fetchone()  # Utilisation de fetchone() car il s'agit d'une seule ligne
     
     # Récupérer les données des produits depuis la base de données
     cursor.execute("SELECT * FROM Produits")
-    Produits = cursor.fetchall()
+    produits = cursor.fetchall()  # Utilisation de fetchall() pour obtenir toutes les lignes
     
-    pdf_content = generate_pdf(Produits, [ 'NomProduit', 'Descriptions', 'Categories', 'Dateajout', 'PrixUnitaire', 'Quantite','IdFournisseurs'])
+    pdf_content = generate_pdf(produits, ['NomProduit', 'Descriptions', 'Categories', 'Dateajout', 'PrixUnitaire', 'Quantite', 'IdFournisseurs'])
     return send_pdf(pdf_content, "Produits.pdf")
+
+
+
 
 @app.route("/exportpdf/utilisateurs")
 def export_utilisateurs_pdf():
     IdUser = session.get('IdUtilisateurs')
     connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser))
-    utilisateurs = cursor.fetchone()
     
-    # Récupérer les données des utilisateurs depuis la base de données
+    # Récupérer les données de l'utilisateur actuel depuis la base de données
+    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
+    utilisateur = cursor.fetchone()  # Utilisation de fetchone() car il s'agit d'une seule ligne
+    
+    # Récupérer les données de tous les utilisateurs depuis la base de données
     cursor.execute("SELECT * FROM Utilisateurs")
-    Utilisateurs = cursor.fetchall()
+    utilisateurs = cursor.fetchall()  # Utilisation de fetchall() pour obtenir toutes les lignes
     
-    pdf_content = generate_pdf(Utilisateurs, ['ID', 'Nom', 'Prenoms', 'Telephone', 'Adresse', 'Email', 'Roles'])
+    pdf_content = generate_pdf(utilisateurs, ['ID', 'Nom', 'Prenoms', 'Telephone', 'Adresse', 'Email', 'Roles'])
     return send_pdf(pdf_content, "Utilisateurs.pdf")
 
 
@@ -469,15 +492,18 @@ def export_stocks_pdf():
     IdUser = session.get('IdUtilisateurs')
     connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser))
-    utilisateurs = cursor.fetchone()
     
-    # Récupérer les données des Stocks depuis la base de données 
+    # Récupérer les données de l'utilisateur actuel depuis la base de données
+    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
+    utilisateur = cursor.fetchone()  # Utilisation de fetchone() car il s'agit d'une seule ligne
+    
+    # Récupérer les données des stocks depuis la base de données
     cursor.execute("SELECT * FROM Stocks")
-    Stocks = cursor.fetchall()
+    stocks = cursor.fetchall()  # Utilisation de fetchall() pour obtenir toutes les lignes
     
-    pdf_content = generate_pdf(Stocks,['ID', 'NomProduit', 'Descriptions', 'Categories', 'Dateajout', 'Quantite', 'PrixUnitaire', 'Statut'])
+    pdf_content = generate_pdf(stocks, ['ID', 'NomProduit', 'Descriptions', 'Categories', 'Dateajout', 'Quantite', 'PrixUnitaire', 'Statut'])
     return send_pdf(pdf_content, "Stocks.pdf")
+
     
     
 @app.route("/exportpdf/clients", methods=['GET', 'POST'])
@@ -502,19 +528,38 @@ def export_vente_pdf():
     IdUser = session.get('IdUtilisateurs')
     connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
-    utilisateurs = cursor.fetchone()
     
-    # Récupérer les données des Ventes depuis la base de données
+    # Récupérer les données de l'utilisateur actuel depuis la base de données
+    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
+    utilisateur = cursor.fetchone()  # Utilisation de fetchone() car il s'agit d'une seule ligne
+    
+    # Récupérer les données des ventes depuis la base de données
     cursor.execute("SELECT * FROM Vente")
-    Vente = cursor.fetchall()
-
-    # Noms de colonnes pour les en-têtes du PDF
+    ventes = cursor.fetchall()  # Utilisation de fetchall() pour obtenir toutes les lignes
+    
+    # Noms des colonnes pour les en-têtes du PDF
     headers = ['IdVente', 'Quantité', 'PrixUnitaire', 'Montant_Total', 'Dates_vente', 'Mode_paiement', 'IdProduits', 'IdClients', 'IdUtilisateurs']
 
     # Générer le contenu PDF avec les données de vente
-    pdf_content = generate_pdf(Vente, headers)
+    pdf_content = generate_pdf(ventes, headers)
     return send_pdf(pdf_content, "vente.pdf")
+
+
+
+
+# @app.route("/exportpdf/fournisseurs")
+# def export_fournisseurs_pdf():
+#     IdUser = session.get('IdUtilisateurs')
+#     connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
+#     cursor = connection.cursor()
+#     cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser))
+#     utilisateurs = cursor.fetchone()
+    
+#     # Récupérer les données des Stocks depuis la base de données
+#     cursor.execute("SELECT * FROM Fournisseurs")
+#     Fournisseurs = cursor.fetchall()
+#     pdf_content = generate_pdf(Fournisseurs,['ID', 'NomEntreprise', 'Nom_Contact', 'Adresse', 'Téléphone', 'Email', 'Catégories_Produit'])
+#     return send_pdf(pdf_content, "fournisseurs.pdf")
 
 
 
@@ -523,14 +568,18 @@ def export_fournisseurs_pdf():
     IdUser = session.get('IdUtilisateurs')
     connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser))
-    utilisateurs = cursor.fetchone()
     
-    # Récupérer les données des Stocks depuis la base de données
+    # Récupérer les données de l'utilisateur actuel depuis la base de données
+    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
+    utilisateur = cursor.fetchone()  
+    
+    # Récupérer les données des fournisseurs depuis la base de données
     cursor.execute("SELECT * FROM Fournisseurs")
-    Fournisseurs = cursor.fetchall()
-    pdf_content = generate_pdf(Fournisseurs,['ID', 'NomEntreprise', 'Nom_Contact', 'Adresse', 'Téléphone', 'Email', 'Catégories_Produit'])
+    fournisseurs = cursor.fetchall()  
+    
+    pdf_content = generate_pdf(fournisseurs, ['ID', 'NomEntreprise', 'Nom_Contact', 'Adresse', 'Téléphone', 'Email', 'Catégories_Produit'])
     return send_pdf(pdf_content, "fournisseurs.pdf")
+
 
 
 # Définir d'autres routes similaires pour les autres tables
@@ -552,10 +601,28 @@ def send_pdf(pdf_content, filename):
     response.headers['Content-Disposition'] = f'attachment; filename={filename}'
     return response
   
+  
+# def generate_pdf(data, headers):
+#     doc = SimpleDocTemplate("temp.pdf", pagesize=letter)
+#     table_data = [headers]
+#     for row in data:
+#         table_row = []
+#         for header in headers:
+#             # Convertir les espaces dans le header en underscores
+#             attribute_name = header.lower().replace(' ', '_')
+#             # Utiliser get() pour récupérer la valeur de l'attribut, avec une valeur par défaut si l'attribut n'existe pas
+#             cell_value = getattr(row, attribute_name, '')
+#             table_row.append(cell_value)
+#         table_data.append(table_row)
+#     table = Table(table_data)
+#     doc.build([table])
+#     with open("temp.pdf", 'rb') as f:
+#         pdf_content = f.read()
+#     return pdf_content
 
-
-
-
+  
+  
+  
 
 # **************** export_excel()*****************
 
@@ -710,61 +777,136 @@ def upload_file():
 
 # ***********************liste_Utilisateurs***********************
 
-@app.route("/Listeutilisateurs", methods=['GET', 'POST'])
-def Listeutilisateurs():
+# @app.route("/liste", methods=['GET', 'POST'])
+# def liste():
   
-     # Vérifier si l'utilisateur est connecté
+#      # Vérifier si l'utilisateur est connecté
+#     if 'IdUtilisateurs' not in session:
+#         return redirect(url_for('login'))
+    
+#     IdUser = session.get('IdUtilisateurs')
+#     connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
+#     cursor = connection.cursor()
+#     cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
+#     utilisateurs = cursor.fetchone()
+    
+#      # Récupérer les utilisateurs paginés depuis la base de données
+#     cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))    
+#     images = utilisateurs.Images.split(',') if utilisateurs.Images else []
+
+#       # Pagination
+#     # page = request.args.get('page', 1, type=int)
+#     # per_page = 5
+#     # offset = (page - 1) * per_page
+    
+    
+#     if request.method == "POST":
+#         Nom = request.form["Nom"]
+#         Prenoms = request.form["Prenoms"]
+#         Telephone = request.form["Telephone"]
+#         Adresse = request.form["Adresse"]
+#         Email = request.form["Email"]
+#         Roles = request.form["Roles"]
+        
+#         cursor.execute("INSERT INTO Utilisateurs (Nom, Prenoms, Telephone, Adresse, Email, Roles, IdUtilisateurs) VALUES (?, ?, ?, ?, ?, ?, ?)",
+#                        (Nom, Prenoms, Telephone, Adresse, Email, Roles ))
+        
+#         connection.commit()
+
+#     connection.close()
+#     return render_template('Utilisateurs/liste.html', utilisateurs=utilisateurs, images=images)
+
+
+
+
+# @app.route("/liste", methods=['GET', 'POST'])
+# def liste():
+#     # Check if the user is authenticated
+#     if 'IdUtilisateurs' not in session:
+#         return redirect(url_for('login'))
+    
+#     connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
+#     cursor = connection.cursor()
+    
+#     IdUser = session.get('IdUtilisateurs')
+    
+#     if request.method == "POST":
+#         # Retrieve form data
+#         Nom = request.form["Nom"]
+#         Prenoms = request.form["Prenoms"]
+#         Telephone = request.form["Telephone"]
+#         Adresse = request.form["Adresse"]
+#         Email = request.form["Email"]
+#         Roles = request.form["Roles"]
+        
+#         # Insert new user into database
+#         cursor.execute("INSERT INTO Utilisateurs (Nom, Prenoms, Telephone, Adresse, Email, Roles, IdUtilisateurs) VALUES (?, ?, ?, ?, ?, ?, ?)",
+#                        (Nom, Prenoms, Telephone, Adresse, Email, Roles, IdUser))
+#         connection.commit()
+        
+#         # Redirect to avoid form resubmission
+#         return redirect(url_for('liste'))
+
+#     # Fetch user details
+#     cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
+#     utilisateurs = cursor.fetchone()
+#     # images = utilisateurs.Images.split(',') if utilisateurs.Images else []
+    
+#     cursor.execute("SELECT * FROM Utilisateurs")
+#     users = cursor.fetchall()
+#     images = users.Images.split(',') if users.Images else []
+    
+#     connection.close()
+    
+#     return render_template('Utilisateurs/liste.html', utilisateurs=utilisateurs, users=users, images=images)
+
+
+
+
+@app.route("/liste", methods=['GET', 'POST'])
+def liste():
+    # Check if the user is authenticated
     if 'IdUtilisateurs' not in session:
         return redirect(url_for('login'))
     
-    IdUser = session.get('IdUtilisateurs')
     connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
     cursor = connection.cursor()
     
-     # Récupérer les informations de l'utilisateur
-    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
-    utilisateurs = cursor.fetchone()
-    
-    # Récupérer la liste des Utilisateurs depuis la base de données
-    # Récupérer la liste des Utilisateurs depuis la base de données
-    
-    # Récupérer les informations de l'utilisateur
-    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
-    utilisateurs = cursor.fetchone()
-
-# Accéder à la valeur de la colonne 'Images'
-    images = utilisateurs.Images.split(',') if utilisateurs.Images else []
-
-    # cursor.execute("SELECT * FROM Utilisateurs")
-    # info_utilisateurs = cursor.fetchall()
-    # images = info_utilisateurs.images.split(',') if info_utilisateurs.images else []
-    cursor.close()
+    IdUser = session.get('IdUtilisateurs')
     
     if request.method == "POST":
+        # Retrieve form data
         Nom = request.form["Nom"]
         Prenoms = request.form["Prenoms"]
         Telephone = request.form["Telephone"]
         Adresse = request.form["Adresse"]
         Email = request.form["Email"]
         Roles = request.form["Roles"]
-
-        connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
-        cursor = connection.cursor()
         
-        # Utilisez l'ID de la Utilisateurs associée
+        # Insert new user into database
         cursor.execute("INSERT INTO Utilisateurs (Nom, Prenoms, Telephone, Adresse, Email, Roles, IdUtilisateurs) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                       (Nom, Prenoms, Telephone, Adresse, Email, Roles ))
-        
+                       (Nom, Prenoms, Telephone, Adresse, Email, Roles, IdUser))
         connection.commit()
+        
+        # Redirect to avoid form resubmission
+        return redirect(url_for('liste'))
 
-
+    # Fetch current user details
+    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
+    utilisateurs = cursor.fetchone()
     
-    # Fermer la connexion à la base de données
-    # cursor.close()
+    # Fetch all users
+    cursor.execute("SELECT * FROM Utilisateurs")
+    users = cursor.fetchall()
+    
+    # Extract images for each user
+    images = [user.Images.split(',') if user.Images else [] for user in users]
+    
     connection.close()
     
+    return render_template('Utilisateurs/liste.html', utilisateurs=utilisateurs, users=users, images=images)
 
-    return render_template('Utilisateurs/Liste_utilisateurs.html',utilisateurs=utilisateurs, images=images)
+
 
 
 
@@ -940,7 +1082,7 @@ def vente():
     
     try:
         cursor.execute("""
-            SELECT Vente.IdVente, Produits.NomProduit, Clients.Nom, Utilisateurs.Nom, Produits.Quantite, Produits.PrixUnitaire, Vente.Montant_Total, Vente.Dates_vente, Vente.Mode_paiement
+            SELECT Vente.IdVente, Produits.NomProduit, Clients.Nom as NomClients, Clients.Prenoms as PrenomsClients, Utilisateurs.Nom as NomUtilisateurs, Utilisateurs.Prenoms as PrenomsUtilisateurs, Vente.Quantite, Produits.PrixUnitaire, Vente.Montant_Total, Vente.Dates_vente, Vente.Mode_paiement
             FROM Vente
             INNER JOIN Produits ON Vente.IdProduits = Produits.IdProduits
             INNER JOIN Clients ON Vente.IdClients = Clients.IdClients
@@ -964,7 +1106,7 @@ def vente():
 
 
 
-@app.route("/vente_client_existant", methods=["GET", "POST"])
+@app.route("/venteclientexistant", methods=["GET", "POST"])
 def venteclientexistant():
     if 'IdUtilisateurs' not in session:
         return redirect(url_for('login'))
@@ -974,45 +1116,45 @@ def venteclientexistant():
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUtilisateurs,))
     utilisateurs = cursor.fetchone()
+    
+
 
     if request.method == "POST":
-        try:
-            NomProduit = request.form.get("NomProduit[]")  # Change here
-            Quantite = request.form.get("Quantite[]")  # Change here
+        # try:
+            NomProduit = request.form.get("NomProduit")  
+            Quantite = request.form.get("Quantite")  
             Mode_paiement = request.form.get("Mode_paiement")
             IdClients = request.form.get("IdClients")
-
-            # Récupération du prix unitaire du produit sélectionné
-            cursor.execute("""
-                SELECT Produits.PrixUnitaire,Produits.idProduits
-                FROM Produits
-                WHERE Produits.NomProduit = ?
-            """, (NomProduit,))
-            prix_unitaire_row = cursor.fetchone()
-            if prix_unitaire_row:
-                PrixUnitaire = prix_unitaire_row[0]
-                IdProduits = prix_unitaire_row[1]
+            cursor = connection.cursor()
+        # Récupération de l'identifiant numérique (IdProduits) du produit sélectionné
+            cursor.execute("SELECT PrixUnitaire FROM Produits WHERE IdProduits = ?", (NomProduit,))
+            row = cursor.fetchone()
+            
+            print(row)
+            print(NomProduit)
+            if row:
+                 PrixUnitaire = row[0]
             else:
-                flash('Le produit sélectionné n\'a pas de prix unitaire défini.', 'danger')
-                return redirect(url_for("vente_client_existant"))
-
+                flash('Le produit sélectionné n\'a pas d\'identifiant correspondant.', 'danger')
+                return redirect(url_for("venteclientexistant"))
+            
             Montant_Total = int(Quantite) * PrixUnitaire
             Dates_vente = datetime.now()
 
             cursor.execute("""
-                INSERT INTO Vente (Quantite, Montant_Total, Dates_vente, Mode_paiement, IdProduits, IdClients, IdUtilisateurs) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-            """, (Quantite, Montant_Total, Dates_vente, Mode_paiement, IdProduits, IdClients, IdUtilisateurs))
+                INSERT INTO Vente (Quantite,PrixUnitaire, Montant_Total, Dates_vente, Mode_paiement, IdProduits, IdClients, IdUtilisateurs) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (Quantite, PrixUnitaire, Montant_Total, Dates_vente, Mode_paiement, NomProduit, IdClients, IdUtilisateurs))
             connection.commit()
 
-            cursor.execute("UPDATE Produits SET Quantite = Quantite - ? WHERE NomProduit = ?", (Quantite, NomProduit))
+            cursor.execute("UPDATE Stocks SET Quantite = Quantite - ? WHERE IdProduits = ?", (Quantite, NomProduit))
             connection.commit()
 
             return redirect(url_for("vente"))
-        except Exception as e:
-            flash(f'Une erreur est survenue lors de l\'ajout de la vente : {str(e)}', 'danger')
+        # except Exception as e:
+        #     flash(f'Une erreur est survenue lors de l\'ajout de la vente : {str(e)}', 'danger')
 
-    cursor.execute("SELECT NomProduit FROM Produits")  # Change here
+    cursor.execute("SELECT IdProduits, NomProduit FROM Produits")  
     produits = cursor.fetchall()
 
     cursor.execute("SELECT IdClients, Nom, Prenoms FROM Clients")
@@ -1021,9 +1163,7 @@ def venteclientexistant():
     cursor.close()
     connection.close()
 
-    return render_template("vente/vente_client_existant.html", produits=produits, clients=clients, utilisateurs=utilisateurs)
-
-
+    return render_template("vente/venteclientexistant.html", produits=produits, clients=clients, utilisateurs=utilisateurs)
 
 
 
@@ -1562,7 +1702,7 @@ def modifierfournisseur(IdFournisseurs):
     # Récupérer les informations du fournisseur à modifier
     cursor.execute("SELECT * FROM Fournisseurs WHERE IdFournisseurs = ?", (IdFournisseurs,))
     Fournisseur = cursor.fetchone()
-    print(f"fournisseur: {fournisseur}")
+    print(f"Fournisseur: {Fournisseur}")
 
     if request.method == "POST":
         try:
@@ -1575,7 +1715,7 @@ def modifierfournisseur(IdFournisseurs):
             Mode_paiement = request.form["Mode_paiement"]
             
             # Mettre à jour les informations du fournisseur dans la base de données
-            cursor.execute("UPDATE Fournisseurs SET NomEntreprise=?, Nom_Contact=?, Adresse=?, Telephone=?, Email=?, Conditions_paiement=? WHERE IdFournisseurs=?",
+            cursor.execute("UPDATE Fournisseurs SET NomEntreprise=?, Nom_Contact=?, Adresse=?, Telephone=?, Email=?, Mode_paiement=? WHERE IdFournisseurs=?",
                            (NomEntreprise, Nom_Contact, Adresse, Telephone, Email,  Mode_paiement, IdFournisseurs))
             connection.commit()
             
@@ -1584,7 +1724,7 @@ def modifierfournisseur(IdFournisseurs):
         except Exception as e:
             # Gérer l'erreur et afficher un message d'erreur approprié
             error_message = "Une erreur s'est produite lors de la modification du fournisseur : " + str(e)
-            return render_template('fournisseur/modifier-fournisseur.html', utilisateurs=utilisateurs, fournisseur=fournisseur, error_message=error_message)
+            return render_template('fournisseur/modifier-fournisseur.html', utilisateurs=utilisateurs, Fournisseur=Fournisseur, error_message=error_message)
         finally:
             cursor.close()
             connection.close()
@@ -1615,7 +1755,7 @@ def supprimerfournisseur(IdFournisseurs):
     cursor = connection.cursor()
    
     cursor.execute("SELECT * FROM Fournisseurs WHERE IdFournisseurs = ?", (IdFournisseurs,))
-    # produit = cursor.fetchone()
+    
     flash(f'Le fournisseurs a été supprimé avec succès !', 'success')
     cursor.execute("DELETE FROM Stocks WHERE IdProduits IN (SELECT IdProduits FROM Produits WHERE IdFournisseurs = ?)", (IdFournisseurs,) )
 
@@ -1632,10 +1772,100 @@ def supprimerfournisseur(IdFournisseurs):
 # ***********************fin-fournisseur***********************
 
 
+# @app.route('/emailing', methods=['POST'])
+# def emailing():
+#     # Vérifier si l'utilisateur est connecté
+#     if 'IdUtilisateurs' not in session:
+#         return redirect(url_for('login'))
+
+#     IdUser = session.get('IdUtilisateurs')
+#     connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
+#     cursor = connection.cursor()
+#     cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
+#     utilisateurs = cursor.fetchone()
+#     # Récupérer le message depuis le formulaire
+#     message = request.form['message']
+
+#     # Récupérer les numéros de téléphone depuis la base de données SQLSERVER
+#     # Assurez-vous d'avoir une connexion à votre base de données et de récupérer les numéros
+
+#     # Envoyer le message à chaque numéro de téléphone
+#     # Utilisez votre service d'envoi de SMS préféré (Twilio, Nexmo, etc.)
+
+#     # Exemple avec Twilio (vous devez installer twilio-python via pip)
+
+#     account_sid = 'VOTRE_ACCOUNT_SID'
+#     auth_token = 'VOTRE_AUTH_TOKEN'
+#     client = Clients(account_sid, auth_token)
+
+#     # Exemple d'envoi de SMS à un numéro
+#     # Remplacez 'from_' par votre numéro Twilio et 'to' par le numéro de téléphone de votre client
+#     # client.messages.create(
+#     #     body=message,
+#     #     from_='VOTRE_NUMERO_TWILIO',
+#     #     to='NUMERO_DU_CLIENT'
+#     # )
+
+#     return "Messages envoyés avec succès !"
 
 
 
 
+
+@app.route('/email', methods=['POST'])
+def email():
+    # Vérifier si l'utilisateur est connecté
+    if 'IdUtilisateurs' not in session:
+        return redirect(url_for('login'))
+    
+    
+        # Vérifier si l'utilisateur est connecté
+    if 'IdUtilisateurs' not in session:
+        return redirect(url_for('login'))
+
+    IdUser = session.get('IdUtilisateurs')
+    connection = pyodbc.connect(app.config['SQL_SERVER_CONNECTION_STRING'])
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM Utilisateurs WHERE IdUtilisateurs = ?", (IdUser,))
+    utilisateurs = cursor.fetchone()
+    # Récupérer le message depuis le formulaire
+    message = request.form['message']
+
+    # Récupérer les adresses e-mail de tous les utilisateurs depuis la base de données
+    cursor.execute("SELECT email FROM Utilisateurs")
+    emails = cursor.fetchall()
+
+
+    # # Configurer les informations de connexion au serveur SMTP
+    # smtp_server = 'smtp.example.com'  # Remplacez par l'adresse du serveur SMTP
+    # smtp_port = 587  # Port SMTP (peut varier selon le fournisseur de messagerie)
+    # smtp_username = 'your_username'  # Nom d'utilisateur pour l'authentification SMTP
+    # smtp_password = 'your_password'  # Mot de passe pour l'authentification SMTP
+
+    # # Créer un objet MIMEMultipart pour le message
+    # msg = MIMEMultipart()
+    # msg['From'] = 'your_email@example.com'  # Adresse e-mail de l'expéditeur
+    # msg['Subject'] = 'Subject of the Email'  # Sujet de l'e-mail
+
+    # # Ajouter le corps du message
+    # msg.attach(MIMEText(message, 'plain'))
+
+    # # Établir une connexion au serveur SMTP
+    # server = smtplib.SMTP(smtp_server, smtp_port)
+    # server.starttls()  # Activer le mode TLS (Transport Layer Security)
+
+    # # Se connecter au serveur SMTP avec les informations d'identification
+    # server.login(smtp_username, smtp_password)
+
+    # # Envoyer l'e-mail à chaque adresse e-mail récupérée
+    # for email in emails:
+    #     msg['To'] = email[0]  # Adresse e-mail du destinataire
+    #     server.sendmail(msg['From'], msg['To'], msg.as_string())
+
+    # # Fermer la connexion au serveur SMTP
+    # server.quit()
+
+    return "Email envoyé à tous les utilisateurs avec succès !"
 
 
 
@@ -1721,10 +1951,6 @@ def supprimerfournisseur(IdFournisseurs):
      #total_purchases=Count('IdClient')).order_by('-total_purchases')[:5]
 
   
-
-
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)

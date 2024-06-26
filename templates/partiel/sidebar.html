@@ -78,7 +78,7 @@
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="{{ url_for('Listeutilisateurs') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                            <a href="{{ url_for('liste') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                                 <i class="uil-home-alt"></i>
                                 <span class="badge bg-success float-end"></span>
                                 <span> Utilisateurs </span>
@@ -97,6 +97,13 @@
                             <i class="uil-home-alt"></i>
                             <span class="badge bg-success float-end"></span>
                             <span> prediction</span>
+                        </a>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="{{ url_for('email') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                            <i class="uil-home-alt"></i>
+                            <span class="badge bg-success float-end"></span>
+                            <span> emailing</span>
                         </a>
                     </li>
                     <!--<li class="side-nav-item">

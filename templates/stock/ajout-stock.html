@@ -228,6 +228,7 @@
                                                                 <div class="col-md-6">
                                                                     <label for="NomProduit" class="form-label">NomProduit</label>
                                                                     <select name="NomProduit" class="form-control" id="NomProduit" required>
+                                                                        <option selected="">Choisissez...</option>
                                                                         {% for produit in produits %}
                                                                             <option value="{{ produit[0] }}">{{ produit[1] }}</option>
                                                                         {% endfor %}
@@ -236,7 +237,7 @@
                                                                         C'est bon !
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="col-md-6">
                                                                     <label for="validationCustom04" class="form-label">Quantite</label>
                                                                     <input type="INT"name="Quantite" class="form-control" id="validationCustom04" placeholder="Quantite" required>

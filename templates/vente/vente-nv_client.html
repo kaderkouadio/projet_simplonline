@@ -206,85 +206,64 @@
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-body">
-                                                            <form action="{{ url_for('ventenvclient') }}"; method="POST" class="row g-3 needs-validation" novalidate>
-                                                                <div class="col-md-6">
-                                                                    <label for="validationCustom01" class="form-label">Nom</label>
-                                                                    <input type="text"  name="Nom" class="form-control" id="validationCustom01" placeholder="Nom" value="" required>
-                                                                    <div class="valid-feedback">
-                                                                        C'est bon !
+                                                            <form id="myForm" class="needs-validation" novalidate method="POST" action="{{ url_for('ventenvclient') }}" onsubmit="afficherRecuVente(); return false;">
+                                                                <div class="row g-3">
+                                                                    <div class="col-md-6">
+                                                                        <label for="validationCustom01" class="form-label">Nom</label>
+                                                                        <input type="text" name="Nom" class="form-control" id="validationCustom01" placeholder="Nom" value="" required>
+                                                                        <div class="valid-feedback">C'est bon !</div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label for="validationCustom02" class="form-label">Prenoms</label>
+                                                                        <input type="text" name="Prenoms" class="form-control" id="validationCustom02" placeholder="Prenoms" value="" required>
+                                                                        <div class="valid-feedback">C'est bon !</div>
+                                                                    </div>
+                                                                    <!-- Ajoutez d'autres champs ici alignés horizontalement -->
+                                                                    <div class="col-md-6">
+                                                                        <label for="validationCustom03" class="form-label">Telephone</label>
+                                                                        <input type="tel" name="Telephone" class="form-control" id="validationCustom03" placeholder="Telephone" required>
+                                                                        <div class="invalid-feedback">Veuillez fournir un numéro de téléphone valide.</div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label for="validationCustom04" class="form-label">Email</label>
+                                                                        <input type="Email" name="Email" class="form-control" id="validationCustom04" placeholder="Email" required>
+                                                                        <div class="invalid-feedback">Veuillez fournir une adresse email valide.</div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label for="validationCustom05" class="form-label">Genre</label>
+                                                                        <select name="Genre" class="form-select" id="validationCustom05" required>
+                                                                            <option selected disabled value="">Choisissez...</option>
+                                                                            <option>Homme</option>
+                                                                            <option>Femme</option>
+                                                                        </select>
+                                                                        <div class="invalid-feedback">Veuillez sélectionner un genre.</div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label for="validationCustom06" class="form-label">Adresse</label>
+                                                                        <input type="text" name="Adresse" class="form-control" id="validationCustom06" placeholder="Adresse" required>
+                                                                        <div class="invalid-feedback">Veuillez fournir une adresse valide.</div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label for="validationCustom07" class="form-label">DatesCreation</label>
+                                                                        <input type="date" name="DatesCreation" class="form-control" id="validationCustom07" placeholder="DatesCreation" required>
+                                                                        <div class="invalid-feedback">Veuillez fournir une date de création valide.</div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label for="validationCustom05" class="form-label">Mode_paiement</label>
+                                                                        <select name="Mode_paiement" class="form-select" id="validationCustom05" required>
+                                                                            <option selected disabled value="">Choisissez...</option>
+                                                                            <option>Espece</option>
+                                                                            <option>Carte de Crédit</option>
+                                                                            <option>Virement Bancaire</option>
+                                                                            <option>Mobile money</option>
+                                                                        </select>
+                                                                        <div class="invalid-feedback">Veuillez sélectionner votre Mode_paiement.</div>
+                                                                    </div>
+                                                                    <!-- Section pour les produits -->
+                                                                    <div id="produits" class="col-12">
+                                                                        <!-- Les champs "NomProduit" et "Quantite" seront ajoutés ici -->
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="validationCustom02" class="form-label">Prenoms</label>
-                                                                    <input type="text"name="Prenoms" class="form-control" id="validationCustom02" placeholder="Prenoms" value="" required>
-                                                                    <div class="valid-feedback">
-                                                                        C'est bon !
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="validationCustom03" class="form-label">Telephone</label>
-                                                                    <input type="tel" name="Telephone" class="form-control" id="validationCustom03" placeholder="Telephone" required>
-                                                                    <div class="invalid-feedback">
-                                                                        Veuillez fournir un numéro de téléphone valide.
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="validationCustom04" class="form-label">Email</label>
-                                                                    <input type="Email" name="Email" class="form-control" id="validationCustom04" placeholder="Email" required>
-                                                                    <div class="invalid-feedback">
-                                                                        Veuillez fournir une adresse email valide.
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="validationCustom05" class="form-label">Genre</label>
-                                                                    <select  name="Genre" class="form-select" id="validationCustom05" required>
-                                                                        <option selected disabled value="">Choisissez...</option>
-                                                                        <option>Homme</option>
-                                                                        <option>Femme</option>
-                                                                    </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Veuillez sélectionner un genre.
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="validationCustom06" class="form-label">Adresse</label>
-                                                                    <input type="text" name="Adresse" class="form-control" id="validationCustom06" placeholder="Adresse" required>
-                                                                    <div class="invalid-feedback">
-                                                                        Veuillez fournir une adresse valide.
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="validationCustom07" class="form-label">DatesCreation</label>
-                                                                    <input type="date"  name="DatesCreation" class="form-control" id="validationCustom07" placeholder="DatesCreation" required>
-                                                                    <div class="invalid-feedback">
-                                                                        Veuillez fournir une date de création valide.
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-12">
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input" id="invalidCheck" required>
-                                                                        <label class="form-check-label form-label" for="invalidCheck">Accepter les conditions d'utilisation</label>
-                                                                        <div class="invalid-feedback">
-                                                                            Vous devez accepter avant de soumettre.
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="validationCustom05" class="form-label">Mode_paiement</label>
-                                                                    <select name="Mode_paiement" class="form-select" id="validationCustom05" required>
-                                                                        <option selected disabled value="">Choisissez...</option>
-                                                                        <option>Espece</option>
-                                                                        <option>Carte de Crédit</option>
-                                                                        <option>Virement Bancaire</option>
-                                                                        <option>Mobile money</option>
-                                                                    </select>
-                                                                    <div class="invalid-feedback">Veuillez sélectionner votre Mode_paiement.</div>
-                                                                </div>
-                                                                 <!-- Section pour les produits -->
-                                                                 <div id="produits" style="display:flex; flex-direction:column;">
-                                                                    <!-- Les champs "NomProduit" et "Quantite" seront ajoutés ici -->
-                                                                </div>
-                                                                
                                                                 <div class="col-12 mt-3">
                                                                     <button type="button" onclick="ajouterChamp()" class="btn btn-primary">Ajouter un produit</button>
                                                                     <button type="submit" class="btn btn-success">Enregistrer</button>
@@ -320,9 +299,7 @@
                         </div>
                     </footer>
                     <!-- end Footer -->
-                    
                 </div> <!-- content -->
-
                 <!-- Footer Start -->
                 <footer class="footer">
                     <div class="container-fluid">
@@ -343,41 +320,72 @@
                 <!-- end Footer -->
 
             </div>
-
-            
-            
-
-            <!-- ============================================================== -->
             <!-- End Page content -->
-            <!-- ============================================================== -->
+            <script>
+                // Fonction pour ajouter un champ de produit
+                function ajouterChamp() {
+                    var newField = `
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="NomProduit" class="form-label">NomProduit</label>
+                                <select name="NomProduit[]" class="form-control" required>
+                                    <option selected="">Choisissez...</option>
+                                    {% for produit in produits %}
+                                        <option value="{{ produit.IdProduits }}">{{ produit.NomProduit }}{{ produit.PrixUnitaire }}</option>
+                                    {% endfor %}
+                                </select>
+                                <div class="valid-feedback">C'est bon !</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom04" class="form-label">Quantite</label>
+                                <input type="number" name="Quantite[]" class="form-control" placeholder="Quantite" required>
+                                <div class="invalid-feedback">Veuillez fournir une quantité valide.</div>
+                            </div>
+                        </div>
+                    `;
+                    // Créez un élément div parent pour chaque champ de produit et sa quantité
+                    var newParentDiv = document.createElement("div");
+                    newParentDiv.classList.add("col-md-12", "mb-3");
+                    newParentDiv.innerHTML = newField;
+                    // Ajoutez le nouvel élément div parent au conteneur produits
+                    document.getElementById("produits").appendChild(newParentDiv);
+                }
+            </script>
 
+            <script>
+                // Fonction pour afficher le reçu de vente dans un popup
+                function afficherRecuVente() {
+                    var client = document.getElementById("IdClients").options[document.getElementById("IdClients").selectedIndex].text;
+                    var modePaiement = document.getElementById("validationCustom05").value;
+                    var produitsVendus = "";
+                    var totalVente = 0;
+                    var quantites = document.getElementsByName("Quantite[]");
+                    var produits = document.getElementsByName("NomProduit[]");
+                    var prixUnitaires = document.getElementsByName("PrixUnitaire[]");
+                    for (var i = 0; i < produits.length; i++) {
+                        var nomProduit = produits[i].options[produits[i].selectedIndex].text;
+                        var prixUnitaire = parseFloat(prixUnitaires[i].value);
+                        var quantite = parseFloat(quantites[i].value);
+                        var coutTotalProduit = prixUnitaire * quantite;
+                        produitsVendus += nomProduit + " - Prix unitaire: " + prixUnitaire.toFixed(2) + " € - Quantité: " + quantite + " - Coût total: " + coutTotalProduit.toFixed(2) + " €<br>";
+                        totalVente += coutTotalProduit;
+                    }
+                    var utilisateur = "{{ utilisateurs.Nom }} {{ utilisateurs.Prenoms }}";
+                    var popupContent = "<h2>Reçu de vente</h2>";
+                    popupContent += "<strong>Client:</strong> " + client + "<br>";
+                    popupContent += "<strong>Produits vendus:</strong><br>" + produitsVendus;
+                    popupContent += "<strong>Utilisateur:</strong> " + utilisateur + "<br>";
+                    popupContent += "<strong>Montant total de la vente:</strong> " + totalVente.toFixed(2) + " €<br>";
+                    popupContent += "<strong>Mode de paiement:</strong> " + modePaiement + "<br>";
+                    var popup = window.open("", "Reçu de vente", "width=600,height=400");
+                    popup.document.write(popupContent);
+                }
+            </script>
+            
+            
 {% endblock %}
 
 
-<script>
-    // Fonction pour ajouter un champ de produit
-    function ajouterChamp() {
-        var newField = `
-            <div class="form-row">
-                <div class="col-md-6 mb-3">
-                    <label for="NomProduit" class="form-label">NomProduit</label>
-                    <select name="NomProduit[]" class="form-control" required>
-                        {% for produit in produits %}
-                            <option value="{{ produit.IdProduits }}">{{ produit.NomProduit }}</option>
-                        {% endfor %}
-                    </select>
-                    <div class="valid-feedback">C'est bon !</div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="validationCustom04" class="form-label">Quantite</label>
-                    <input type="number" name="Quantite[]" class="form-control" placeholder="Quantite" required>
-                    <div class="invalid-feedback">Veuillez fournir une quantité valide.</div>
-                </div>
-            </div>
-        `;
-        $('#produits').append(newField);
-    }
-</script>
 
 
 

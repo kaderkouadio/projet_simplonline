@@ -42,7 +42,7 @@ CREATE TABLE Fournisseurs (
 	Adresse VARCHAR(200),
 	Telephone VARCHAR(200),
 	Email VARCHAR(200),
-	Conditions_paiement VARCHAR(200),   
+	Mode_paiement VARCHAR(200),   
 );
 
 
@@ -58,7 +58,7 @@ CREATE TABLE Clients (
 	DatesCreation VARCHAR(200),
 );
 
-
+SELECT IdProduits,NomProduit FROM Produits
 
 DROP TABLE IF EXISTS Produits;
 CREATE TABLE Produits (
